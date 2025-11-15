@@ -15,11 +15,30 @@ class AlgorandService {
   }
 
   /**
+   * Validate Algorand address format
+   */
+  validateAddress(address) {
+    if (!address) {
+      throw new Error('Address is required');
+    }
+    
+    // Trim whitespace
+    const trimmedAddress = address.trim();
+    
+    if (!algosdk.isValidAddress(trimmedAddress)) {
+      throw new Error(`Invalid Algorand address format: ${trimmedAddress}`);
+    }
+    
+    return trimmedAddress;
+  }
+
+  /**
    * Get account information
    */
   async getAccountInfo(address) {
     try {
-      const accountInfo = await this.algodClient.accountInformation(address).do();
+      const validAddress = this.validateAddress(address);
+      const accountInfo = await this.algodClient.accountInformation(validAddress).do();
       return {
         address: accountInfo.address,
         amount: accountInfo.amount,
@@ -38,6 +57,14 @@ class AlgorandService {
     try {
       const { creator, name, type, purchasable, price, metadata } = params;
 
+      // Validate creator address
+      const validCreator = this.validateAddress(creator);
+
+      // Validate required fields
+      if (!name || !type) {
+        throw new Error('NFT name and type are required');
+      }
+
       // Get suggested params
       const suggestedParams = await this.algodClient.getTransactionParams().do();
 
@@ -52,7 +79,7 @@ class AlgorandService {
 
       // Create application call transaction
       const txn = algosdk.makeApplicationNoOpTxn(
-        creator,
+        validCreator,
         suggestedParams,
         this.appId,
         appArgs
@@ -73,14 +100,24 @@ class AlgorandService {
   async createNFTAsset(params) {
     try {
       const { creator, assetName, unitName, total, decimals, url, metadata } = params;
+      
+      // Validate creator address with detailed error
       if (!creator) {
-        throw new Error('Creator address must be provided to create an NFT asset.');
+        throw new Error('Creator address is required. Please ensure wallet is connected.');
       }
+
+      const validCreator = this.validateAddress(creator);
+
+      // Validate asset parameters
+      if (!assetName) {
+        throw new Error('Asset name is required');
+      }
+
       const suggestedParams = await this.algodClient.getTransactionParams().do();
 
       // Create asset configuration transaction
       const txn = algosdk.makeAssetCreateTxnWithSuggestedParamsFromObject({
-        from: creator,
+        from: validCreator,
         total: total || 1,
         decimals: decimals || 0,
         assetName: assetName,
@@ -89,16 +126,21 @@ class AlgorandService {
         assetMetadataHash: metadata ? new Uint8Array(Buffer.from(metadata)) : undefined,
         defaultFrozen: false,
         freeze: undefined,
-        manager: creator,
+        manager: validCreator,
         clawback: undefined,
         reserve: undefined,
         suggestedParams
       });
+      
       return {
         txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64'),
         txnId: txn.txID()
       };
     } catch (error) {
+      // Provide more context in error message
+      if (error.message.includes('Invalid Algorand address')) {
+        throw new Error(`Invalid creator address format. Please reconnect your wallet. Details: ${error.message}`);
+      }
       throw new Error(`Failed to create NFT asset: ${error.message}`);
     }
   }
@@ -110,6 +152,12 @@ class AlgorandService {
     try {
       const { seller, price } = params;
 
+      const validSeller = this.validateAddress(seller);
+
+      if (!price || price <= 0) {
+        throw new Error('Valid price is required');
+      }
+
       const suggestedParams = await this.algodClient.getTransactionParams().do();
 
       const appArgs = [
@@ -118,7 +166,7 @@ class AlgorandService {
       ];
 
       const txn = algosdk.makeApplicationNoOpTxn(
-        seller,
+        validSeller,
         suggestedParams,
         this.appId,
         appArgs
@@ -140,6 +188,13 @@ class AlgorandService {
     try {
       const { buyer, seller, price, platformFee } = params;
 
+      const validBuyer = this.validateAddress(buyer);
+      const validSeller = this.validateAddress(seller);
+
+      if (!price || price <= 0) {
+        throw new Error('Valid price is required');
+      }
+
       const suggestedParams = await this.algodClient.getTransactionParams().do();
 
       // Calculate amounts
@@ -148,25 +203,25 @@ class AlgorandService {
 
       // Create payment transactions
       const feeTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-        from: buyer,
+        from: validBuyer,
         to: process.env.PLATFORM_WALLET,
         amount: feeAmount,
         suggestedParams
       });
 
       const paymentTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-        from: buyer,
-        to: seller,
+        from: validBuyer,
+        to: validSeller,
         amount: sellerAmount,
         suggestedParams
       });
 
       // Create application call transaction
       const appArgs = [new Uint8Array(Buffer.from('buy_nft'))];
-      const accounts = [seller];
+      const accounts = [validSeller];
 
       const appCallTxn = algosdk.makeApplicationNoOpTxn(
-        buyer,
+        validBuyer,
         suggestedParams,
         this.appId,
         appArgs,
@@ -225,7 +280,8 @@ class AlgorandService {
    */
   async getApplicationState(address) {
     try {
-      const accountInfo = await this.algodClient.accountInformation(address).do();
+      const validAddress = this.validateAddress(address);
+      const accountInfo = await this.algodClient.accountInformation(validAddress).do();
       const localState = accountInfo['apps-local-state']?.find(
         app => app.id === this.appId
       );
@@ -259,6 +315,10 @@ class AlgorandService {
    */
   async getAssetInfo(assetId) {
     try {
+      if (!assetId || assetId <= 0) {
+        throw new Error('Valid asset ID is required');
+      }
+
       const assetInfo = await this.algodClient.getAssetByID(assetId).do();
       return {
         index: assetInfo.index,
@@ -275,10 +335,11 @@ class AlgorandService {
    */
   async createOptInTransaction(address) {
     try {
+      const validAddress = this.validateAddress(address);
       const suggestedParams = await this.algodClient.getTransactionParams().do();
 
       const txn = algosdk.makeApplicationOptInTxn(
-        address,
+        validAddress,
         suggestedParams,
         this.appId
       );
