@@ -1,23 +1,25 @@
-name: "Issue Thank You Bot"
+name: Issue Thank You Bot
 
-on:
+"on":
   issues:
     types: [opened]
 
 jobs:
   thank_user:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write  
+
     steps:
-      - name: Send thank you message
+      - name: Comment on new issue
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
           body: |
             👋 Hi @${{ github.event.issue.user.login }}!
-
+            
             Thank you for opening this issue 🎉  
-            We appreciate your time and effort in helping improve this project.
+            Your report helps make this project better.
 
-            We will review your issue shortly.  
-            Stay awesome! 🚀
+            We'll review it shortly 🚀
