@@ -1,5 +1,45 @@
 # AlgoFi 🎨🎵
 
+## **Table of Contents**
+
+1. [Overview](#algofi-)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+
+   * [Frontend](#frontend)
+   * [Backend](#backend)
+   * [Smart Contract](#smart-contract)
+4. [Project Structure](#project-structure)
+5. [Installation](#installation)
+
+   * [Prerequisites](#prerequisites)
+   * [Backend Setup](#backend-setup)
+   * [Frontend Setup](#frontend-setup)
+   * [Smart Contract Deployment](#smart-contract-deployment)
+6. [Usage](#usage)
+
+   * [For Creators](#for-creators)
+   * [For Collectors](#for-collectors)
+7. [API Endpoints](#api-endpoints)
+
+   * [NFT Operations](#nft-operations)
+   * [Transaction Operations](#transaction-operations)
+   * [Marketplace](#marketplace)
+8. [Smart Contract Functions](#smart-contract-functions)
+9. [Testing](#testing)
+10. [Security Considerations](#security-considerations)
+11. [Troubleshooting](#troubleshooting)
+12. [Future Enhancements](#future-enhancements)
+13. [Resources](#resources)
+14. [License](#license)
+15. [Contributing](#contributing)
+16. [Support](#support)
+
+---
+
+
+# AlgoFi 🎨🎵
+
 A decentralized NFT marketplace on the Algorand testnet where creators can mint, showcase, and distribute a wide range of NFTs including art, music, and standard digital collectibles.
 
 ## Features
