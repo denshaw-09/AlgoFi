@@ -64,7 +64,7 @@
 
 ### 4. **GitHub Issue Template** ✅
 
-**File:** `.github/ISSUE_TEMPLATE.md`
+**File:** `.github/ISSUE_TEMPLATE/issue_template.md`
 **Sections:**
 
 - Bug Report template with reproduction steps
