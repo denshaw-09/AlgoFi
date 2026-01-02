@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './views/Home';
 import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
+import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -29,7 +30,7 @@ function App() {
     setLoading(true);
     try {
       const newAccounts = await peraWallet.connect();
-      
+
       // Setup the disconnect event listener
       peraWallet.connector?.on("disconnect", handleDisconnectWallet);
 
@@ -83,110 +84,112 @@ function App() {
   }, [peraWallet, handleDisconnectWallet]);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-        <Header 
-          account={account}
-          connected={connected}
-          connectWallet={connectWallet}
-          disconnectWallet={disconnectWallet}
-          loading={loading}
-        />
-        
-        <main className="container mx-auto px-4 py-8">
-          <Routes>
-            <Route 
-              path="/" 
-              element={<Home account={account} connected={connected} />} 
-            />
-            <Route 
-              path="/marketplace" 
-              element={<Marketplace account={account} connected={connected} />} 
-            />
-            <Route 
-              path="/portfolio" 
-              element={<Portfolio account={account} connected={connected} />} 
-            />
-          </Routes>
-        </main>
+    <ThemeProvider>
+      <Router>
+        <div className="min-h-screen transition-colors duration-300 bg-slate-50 dark:bg-slate-900 bg-gradient-to-br from-slate-50 via-purple-50 to-slate-100 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900">
+          <Header
+            account={account}
+            connected={connected}
+            connectWallet={connectWallet}
+            disconnectWallet={disconnectWallet}
+            loading={loading}
+          />
 
-        <footer className="bg-slate-900/50 backdrop-blur-lg border-t border-purple-500/20 mt-20">
-          <div className="container mx-auto px-4 py-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div>
-                <h3 className="text-xl font-bold text-white mb-4">AlgoFi</h3>
-                <p className="text-gray-400">
-                  Decentralized NFT marketplace on Algorand for artists, musicians, and creators.
+          <main className="container mx-auto px-4 py-8">
+            <Routes>
+              <Route
+                path="/"
+                element={<Home account={account} connected={connected} />}
+              />
+              <Route
+                path="/marketplace"
+                element={<Marketplace account={account} connected={connected} />}
+              />
+              <Route
+                path="/portfolio"
+                element={<Portfolio account={account} connected={connected} />}
+              />
+            </Routes>
+          </main>
+
+          <footer className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border-t border-purple-200 dark:border-purple-500/20 mt-20 transition-colors duration-300">
+            <div className="container mx-auto px-4 py-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">AlgoFi</h3>
+                  <p className="text-slate-600 dark:text-gray-400">
+                    Decentralized NFT marketplace on Algorand for artists, musicians, and creators.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Quick Links</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <a href="/" className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                        Home
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/marketplace" className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                        Marketplace
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/portfolio" className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition">
+                        Portfolio
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">Resources</h4>
+                  <ul className="space-y-2">
+                    <li>
+                      <a
+                        href="https://developer.algorand.org/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition"
+                      >
+                        Algorand Docs
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://testnet.algoexplorer.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-purple-400 transition"
+                      >
+                        TestNet Explorer
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://bank.testnet.algorand.network/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-purple-400 transition"
+                      >
+                        TestNet Dispenser
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="border-t border-purple-200 dark:border-purple-500/20 mt-8 pt-8 text-center">
+                <p className="text-slate-600 dark:text-gray-400">
+                  © 2025 AlgoFi. Built on Algorand TestNet.
                 </p>
               </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="/" className="text-gray-400 hover:text-purple-400 transition">
-                      Home
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/marketplace" className="text-gray-400 hover:text-purple-400 transition">
-                      Marketplace
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/portfolio" className="text-gray-400 hover:text-purple-400 transition">
-                      Portfolio
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              
-              <div>
-                <h4 className="text-lg font-semibold text-white mb-4">Resources</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a 
-                      href="https://developer.algorand.org/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-purple-400 transition"
-                    >
-                      Algorand Docs
-                    </a>
-                  </li>
-                  <li>
-                    <a 
-                      href="https://testnet.algoexplorer.io/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-purple-400 transition"
-                    >
-                      TestNet Explorer
-                    </a>
-                  </li>
-                  <li>
-                    <a 
-                      href="https://bank.testnet.algorand.network/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-purple-400 transition"
-                    >
-                      TestNet Dispenser
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
-            
-            <div className="border-t border-purple-500/20 mt-8 pt-8 text-center">
-              <p className="text-gray-400">
-                © 2025 AlgoFi. Built on Algorand TestNet. 
-              </p>
-            </div>
-          </div>
-        </footer>
-      </div>
-    </Router>
+          </footer>
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
 

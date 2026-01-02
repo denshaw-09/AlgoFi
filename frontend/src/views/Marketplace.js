@@ -121,16 +121,16 @@ function Marketplace({ account, connected }) {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-5xl font-bold text-white mb-4">
+        <h1 className="text-5xl font-bold text-slate-900 dark:text-white mb-4">
           Explore Marketplace
         </h1>
-        <p className="text-xl text-gray-300">
+        <p className="text-xl text-slate-600 dark:text-gray-300">
           Discover unique NFTs from talented creators
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/20">
+      <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-purple-200 dark:border-purple-500/20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div className="md:col-span-1">
@@ -139,7 +139,7 @@ function Marketplace({ account, connected }) {
               placeholder="Search NFTs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-700/50 border border-purple-200 dark:border-purple-500/30 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-400 focus:outline-none focus:border-purple-500"
             />
           </div>
 
@@ -148,7 +148,7 @@ function Marketplace({ account, connected }) {
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-700/50 border border-purple-200 dark:border-purple-500/30 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
             >
               {filterOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -163,7 +163,7 @@ function Marketplace({ account, connected }) {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 bg-white dark:bg-slate-700/50 border border-purple-200 dark:border-purple-500/30 rounded-lg text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
             >
               <option value="newest">Newest First</option>
               <option value="price-low">Price: Low to High</option>
@@ -179,11 +179,10 @@ function Marketplace({ account, connected }) {
           <button
             key={option.value}
             onClick={() => setFilter(option.value)}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              filter === option.value
-                ? 'bg-purple-500 text-white'
-                : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700'
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition ${filter === option.value
+              ? 'bg-purple-500 text-white'
+              : 'bg-white/60 dark:bg-slate-800/50 text-slate-600 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-700'
+              }`}
           >
             {option.icon} {option.label}
           </button>
@@ -191,8 +190,8 @@ function Marketplace({ account, connected }) {
       </div>
 
       {/* Results Count */}
-      <div className="text-gray-300">
-        Showing <span className="font-bold text-white">{filteredNfts.length}</span> {filteredNfts.length === 1 ? 'NFT' : 'NFTs'}
+      <div className="text-slate-600 dark:text-gray-300">
+        Showing <span className="font-bold text-slate-900 dark:text-white">{filteredNfts.length}</span> {filteredNfts.length === 1 ? 'NFT' : 'NFTs'}
       </div>
 
       {/* NFT Grid */}
@@ -215,8 +214,8 @@ function Marketplace({ account, connected }) {
       ) : (
         <div className="text-center py-20">
           <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-bold text-white mb-2">No NFTs Found</h3>
-          <p className="text-gray-400">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">No NFTs Found</h3>
+          <p className="text-slate-600 dark:text-gray-400">
             Try adjusting your filters or search query
           </p>
         </div>
@@ -224,11 +223,11 @@ function Marketplace({ account, connected }) {
 
       {/* Info Banner */}
       {!connected && (
-        <div className="bg-purple-500/20 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/30 text-center">
-          <h3 className="text-2xl font-bold text-white mb-2">
+        <div className="bg-purple-500/20 backdrop-blur-lg rounded-2xl p-8 border border-purple-200 dark:border-purple-500/30 text-center">
+          <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">
             Connect Your Wallet
           </h3>
-          <p className="text-gray-300">
+          <p className="text-slate-600 dark:text-gray-300">
             Connect your wallet to purchase NFTs and interact with the marketplace
           </p>
         </div>

@@ -43,9 +43,9 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
   return (
     <>
-      <div className="bg-slate-800/50 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition group">
+      <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-200 dark:border-purple-500/20 hover:border-purple-500/50 transition group">
         {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-slate-700/50">
+        <div className="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-700/50">
           {nft.imageUrl ? (
             <img
               src={nft.imageUrl}
@@ -57,7 +57,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
               <span className="text-6xl">{typeEmojis[nft.type] || '💎'}</span>
             </div>
           )}
-          
+
           {/* Type Badge */}
           <div className="absolute top-3 right-3">
             <span className="px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
@@ -77,12 +77,12 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
         {/* Details */}
         <div className="p-5">
-          <h3 className="text-xl font-bold text-white mb-2 truncate">
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 truncate">
             {nft.name}
           </h3>
-          
+
           {nft.description && (
-            <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+            <p className="text-slate-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
               {nft.description}
             </p>
           )}
@@ -93,24 +93,24 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
               <span className="text-xs">👤</span>
             </div>
             <div>
-              <p className="text-xs text-gray-500">Creator</p>
-              <p className="text-sm text-gray-300 font-medium">
+              <p className="text-xs text-slate-500 dark:text-gray-500">Creator</p>
+              <p className="text-sm text-slate-700 dark:text-gray-300 font-medium">
                 {nft.creator?.slice(0, 6)}...{nft.creator?.slice(-4)}
               </p>
             </div>
           </div>
 
           {/* Price or Free */}
-          <div className="border-t border-purple-500/20 pt-4">
+          <div className="border-t border-purple-200 dark:border-purple-500/20 pt-4">
             {nft.purchasable && nft.price > 0 ? (
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-gray-500">Price</p>
-                  <p className="text-2xl font-bold text-purple-400">
+                  <p className="text-xs text-slate-500 dark:text-gray-500">Price</p>
+                  <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
                     {formatPrice(nft.price)} <span className="text-lg">ALGO</span>
                   </p>
                 </div>
-                
+
                 {showActions && account && account !== nft.creator && (
                   <button
                     onClick={() => setShowBuyModal(true)}
@@ -123,7 +123,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
               </div>
             ) : (
               <div className="text-center">
-                <p className="text-gray-400 text-sm">
+                <p className="text-slate-500 dark:text-gray-400 text-sm">
                   {nft.purchasable ? 'Not listed for sale' : 'Non-purchasable collectible'}
                 </p>
               </div>
@@ -135,29 +135,29 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
       {/* Buy Confirmation Modal */}
       {showBuyModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-500/30">
-            <h3 className="text-2xl font-bold text-white mb-4">Confirm Purchase</h3>
-            
+          <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-200 dark:border-purple-500/30">
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Confirm Purchase</h3>
+
             <div className="space-y-4 mb-6">
               <div className="flex justify-between">
-                <span className="text-gray-400">NFT:</span>
-                <span className="text-white font-medium">{nft.name}</span>
+                <span className="text-slate-600 dark:text-gray-400">NFT:</span>
+                <span className="text-slate-900 dark:text-white font-medium">{nft.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400">Price:</span>
-                <span className="text-purple-400 font-bold">
+                <span className="text-slate-600 dark:text-gray-400">Price:</span>
+                <span className="text-purple-600 dark:text-purple-400 font-bold">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-400">Platform Fee (2.5%):</span>
-                <span className="text-gray-300">
+                <span className="text-slate-600 dark:text-gray-400">Platform Fee (2.5%):</span>
+                <span className="text-slate-500 dark:text-gray-300">
                   {formatPrice(nft.price * 0.025)} ALGO
                 </span>
               </div>
-              <div className="border-t border-purple-500/20 pt-4 flex justify-between">
-                <span className="text-white font-bold">Total:</span>
-                <span className="text-white font-bold">
+              <div className="border-t border-purple-200 dark:border-purple-500/20 pt-4 flex justify-between">
+                <span className="text-slate-900 dark:text-white font-bold">Total:</span>
+                <span className="text-slate-900 dark:text-white font-bold">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>
@@ -167,7 +167,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
               <button
                 onClick={() => setShowBuyModal(false)}
                 disabled={loading}
-                className="flex-1 px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition"
+                className="flex-1 px-4 py-3 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-900 dark:text-white rounded-lg font-medium transition"
               >
                 Cancel
               </button>

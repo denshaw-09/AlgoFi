@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 function Header({ account, connected, connectWallet, disconnectWallet, loading }) {
   const location = useLocation();
@@ -21,7 +22,7 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
   ];
 
   return (
-    <header className="bg-slate-900/80 backdrop-blur-lg border-b border-purple-500/20 sticky top-0 z-50">
+    <header className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-purple-200 dark:border-purple-500/20 sticky top-0 z-50 transition-colors duration-300">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -40,19 +41,19 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-medium transition ${
-                  isActive(link.path)
-                    ? 'bg-purple-500/20 text-purple-400'
-                    : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                }`}
+                className={`px-4 py-2 rounded-lg font-medium transition ${isActive(link.path)
+                  ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
+                  : 'text-slate-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-400'
+                  }`}
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Wallet Connection */}
-          <div className="hidden md:block">
+          {/* Wallet Connection & Theme Toggle */}
+          <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             {connected ? (
               <div className="flex items-center space-x-3">
                 <div className="px-4 py-2 bg-purple-500/20 rounded-lg border border-purple-500/30">
@@ -81,7 +82,7 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-300 hover:text-white"
+            className="md:hidden p-2 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white"
           >
             <svg
               className="w-6 h-6"
@@ -109,17 +110,20 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 key={link.path}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2 rounded-lg font-medium transition ${
-                  isActive(link.path)
-                    ? 'bg-purple-500/20 text-purple-400'
-                    : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                }`}
+                className={`block px-4 py-2 rounded-lg font-medium transition ${isActive(link.path)
+                    ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
+                    : 'text-slate-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-400'
+                  }`}
               >
                 {link.label}
               </Link>
             ))}
-            
-            <div className="pt-2 border-t border-purple-500/20">
+
+            <div className="pt-2 border-t border-purple-200 dark:border-purple-500/20 flex flex-col space-y-4">
+              <div className="flex justify-between items-center px-2">
+                <span className="text-slate-600 dark:text-gray-300 font-medium">Theme</span>
+                <ThemeToggle />
+              </div>
               {connected ? (
                 <>
                   <div className="px-4 py-2 bg-purple-500/20 rounded-lg border border-purple-500/30 mb-2">
