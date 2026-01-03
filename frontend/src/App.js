@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './views/Home';
 import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -109,7 +110,7 @@ function App() {
             />
           </Routes>
         </main>
-
+        <ScrollToTop />
         <footer className="bg-slate-900/50 backdrop-blur-lg border-t border-purple-500/20 mt-20">
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
