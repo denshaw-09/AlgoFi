@@ -54,14 +54,14 @@ function Home({ account, connected }) {
           <div className="flex flex-wrap justify-center gap-4">
             <Link
               to="/marketplace"
-              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-bold text-lg transition transform hover:scale-105"
+              className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-bold text-lg transition transform hover:scale-105 hover-glitter"
             >
               Explore Marketplace
             </Link>
             {connected ? (
               <a
                 href="#mint"
-                className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-bold text-lg transition border border-purple-500/30"
+                className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg font-bold text-lg transition border border-purple-500/30 hover-glitter"
               >
                 Start Minting
               </a>
@@ -76,15 +76,15 @@ function Home({ account, connected }) {
 
       {/* Stats Section */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center">
+        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center hover-glitter hover:scale-105 transition transform duration-300">
           <div className="text-4xl font-bold text-purple-400 mb-2">Fast</div>
           <p className="text-gray-300">4.5 Second Finality</p>
         </div>
-        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center">
+        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center hover-glitter hover:scale-105 transition transform duration-300">
           <div className="text-4xl font-bold text-pink-400 mb-2">Low Cost</div>
           <p className="text-gray-300">~0.001 ALGO Fees</p>
         </div>
-        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center">
+        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20 text-center hover-glitter hover:scale-105 transition transform duration-300">
           <div className="text-4xl font-bold text-purple-400 mb-2">Eco-Friendly</div>
           <p className="text-gray-300">Carbon Negative</p>
         </div>

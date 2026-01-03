@@ -40,11 +40,10 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg font-medium transition ${
-                  isActive(link.path)
+                className={`px-4 py-2 rounded-lg font-medium transition ${isActive(link.path)
                     ? 'bg-purple-500/20 text-purple-400'
                     : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
@@ -71,7 +70,7 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
               <button
                 onClick={connectWallet}
                 disabled={loading}
-                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed hover-glitter hover:scale-105 transform duration-300"
               >
                 {loading ? 'Connecting...' : 'Connect Wallet'}
               </button>
@@ -109,16 +108,15 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 key={link.path}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-2 rounded-lg font-medium transition ${
-                  isActive(link.path)
+                className={`block px-4 py-2 rounded-lg font-medium transition ${isActive(link.path)
                     ? 'bg-purple-500/20 text-purple-400'
                     : 'text-gray-300 hover:bg-purple-500/10 hover:text-purple-400'
-                }`}
+                  }`}
               >
                 {link.label}
               </Link>
             ))}
-            
+
             <div className="pt-2 border-t border-purple-500/20">
               {connected ? (
                 <>
