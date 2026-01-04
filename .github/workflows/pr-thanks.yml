@@ -36,44 +36,53 @@ jobs:
             let message = '';
 
             if (eventName === 'pull_request_target' && payload.action === 'opened') {
-              message = `
-              Hi @${author}! 👋
-              
-              **Thanks for contributing to ${repo}!** 🎉
-              We appreciate your effort and will review your changes soon.
-              
-              ---
-              ⭐ **Please star the repo if you like it!**
-              **[Follow the owner](https://github.com/${owner}) for updates.**
-              `;
+              message = `Hi @${author}! 👋
+
+            **Thanks for contributing to ${repo}!** 🎉
+            We appreciate your effort and will review your changes soon.
+
+            ---
+
+            ⭐ **Please star the repo if you like it!**
+            👤 **[Follow the owner](https://github.com/${owner}) for updates.**`;
             } 
             
             else if (eventName === 'pull_request_target' && payload.action === 'closed') {
               if (payload.pull_request.merged) {
-                 message = `
-                 **PR Merged!** 
-                 
-                 Awesome work, @${author}! Your contribution has been added. 
-                 Looking forward to more changes from you in the future! 🔥
-                 `;
+                 message = ` **PR Merged!** 
+
+            Awesome work, @${author}! Your contribution has been added. 
+            Looking forward to more changes from you in the future! 🔥
+
+            ---
+
+            ⭐ **Please star the repo if you like it!**
+            👤 **[Follow the owner](https://github.com/${owner}) for updates.**`;
+
               } else {
-                 message = `
-                 **PR Closed**
-                 
-                 Thanks for your interest, @${author}. Even though this wasn't merged, we appreciate the effort!
-                 `;
+                 message = ` **PR Closed**
+
+            Thanks for your interest, @${author}. Even though this wasn't merged, we appreciate the effort!
+
+            ---
+              
+            ⭐ **Please star the repo if you like it!**
+            👤 **[Follow the owner](https://github.com/${owner}) for updates.**`;
+
               }
             }
+
             else if (eventName === 'issues' && payload.action === 'closed') {
-              message = `
-              **Issue Resolved!**
-              
-              Thanks for helping us maintain the repo, @${author}. 
-              If you have more ideas, feel free to open a new issue!
-              
-              ---
-              ⭐ **Don't forget to star the repo!**
-              `;
+              message = `**Issue Resolved!**
+
+            Thanks for helping us maintain the repo, @${author}. 
+            If you have more ideas, feel free to open a new issue!
+
+            ---
+
+            ⭐ **Don't forget to star the repo!**
+            👤 **[Follow the owner](https://github.com/${owner}) for updates.**`;
+
             }
 
             if (message) {
