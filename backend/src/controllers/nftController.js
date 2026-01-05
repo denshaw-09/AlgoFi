@@ -1,4 +1,4 @@
-const algorandService = require('../services/algorandService');
+import algorandService from "../services/algorandService.js";
 
 class NFTController {
   /**
@@ -9,7 +9,7 @@ class NFTController {
       const { address } = req.params;
 
       if (!address) {
-        return res.status(400).json({ error: 'Address is required' });
+        return res.status(400).json({ error: "Address is required" });
       }
 
       const accountInfo = await algorandService.getAccountInfo(address);
@@ -19,14 +19,14 @@ class NFTController {
         success: true,
         data: {
           ...accountInfo,
-          nftData: appState
-        }
+          nftData: appState,
+        },
       });
     } catch (error) {
-      console.error('Get account error:', error);
-      res.status(500).json({ 
+      console.error("Get account error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -36,46 +36,52 @@ class NFTController {
    */
   async mintNFT(req, res) {
     try {
-      const { 
+      const {
         creator,
-        name, 
-        type, 
-        purchasable, 
-        price, 
+        name,
+        type,
+        purchasable,
+        price,
         assetName,
         unitName,
         description,
-        metadata 
+        metadata,
       } = req.body;
 
-      console.log('Mint NFT Request:', { creator, name, type, purchasable, price });
+      console.log("Mint NFT Request:", {
+        creator,
+        name,
+        type,
+        purchasable,
+        price,
+      });
 
       // Validation
       if (!creator) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Creator address is required. Please connect your wallet.' 
+          error: "Creator address is required. Please connect your wallet.",
         });
       }
 
       if (!name || !type) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'NFT name and type are required fields.' 
+          error: "NFT name and type are required fields.",
         });
       }
 
-      if (!['art', 'music', 'standard'].includes(type)) {
-        return res.status(400).json({ 
+      if (!["art", "music", "standard"].includes(type)) {
+        return res.status(400).json({
           success: false,
-          error: 'Type must be art, music, or standard' 
+          error: "Type must be art, music, or standard",
         });
       }
 
       if (purchasable && (!price || price <= 0)) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Price must be greater than 0 for purchasable NFTs' 
+          error: "Price must be greater than 0 for purchasable NFTs",
         });
       }
 
@@ -83,11 +89,11 @@ class NFTController {
       const assetTxn = await algorandService.createNFTAsset({
         creator,
         assetName: assetName || name,
-        unitName: unitName || 'NFT',
+        unitName: unitName || "NFT",
         total: 1,
         decimals: 0,
-        url: '', // Will be updated after IPFS upload in production
-        metadata: description || metadata || ''
+        url: "", // Will be updated after IPFS upload in production
+        metadata: description || metadata || "",
       });
 
       // Create application call transaction
@@ -97,24 +103,24 @@ class NFTController {
         type,
         purchasable: purchasable || false,
         price: price || 0,
-        metadata: description || metadata || ''
+        metadata: description || metadata || "",
       });
 
-      console.log('Mint transactions created successfully');
+      console.log("Mint transactions created successfully");
 
       res.status(200).json({
         success: true,
         data: {
           assetTransaction: assetTxn,
           appTransaction: appTxn,
-          message: 'Sign both transactions in your wallet'
-        }
+          message: "Sign both transactions in your wallet",
+        },
       });
     } catch (error) {
-      console.error('Mint NFT error:', error);
-      res.status(500).json({ 
+      console.error("Mint NFT error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -127,26 +133,26 @@ class NFTController {
       const { seller, price } = req.body;
 
       if (!seller || !price || price <= 0) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Seller and valid price are required' 
+          error: "Seller and valid price are required",
         });
       }
 
       const transaction = await algorandService.createListTransaction({
         seller,
-        price
+        price,
       });
 
       res.status(200).json({
         success: true,
-        data: transaction
+        data: transaction,
       });
     } catch (error) {
-      console.error('List NFT error:', error);
-      res.status(500).json({ 
+      console.error("List NFT error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -159,9 +165,9 @@ class NFTController {
       const { buyer, seller, price } = req.body;
 
       if (!buyer || !seller || !price) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Buyer, seller, and price are required' 
+          error: "Buyer, seller, and price are required",
         });
       }
 
@@ -171,7 +177,7 @@ class NFTController {
         buyer,
         seller,
         price,
-        platformFee
+        platformFee,
       });
 
       res.status(200).json({
@@ -179,14 +185,14 @@ class NFTController {
         data: {
           ...transactions,
           platformFee,
-          message: 'Sign all grouped transactions in your wallet'
-        }
+          message: "Sign all grouped transactions in your wallet",
+        },
       });
     } catch (error) {
-      console.error('Buy NFT error:', error);
-      res.status(500).json({ 
+      console.error("Buy NFT error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -199,9 +205,9 @@ class NFTController {
       const { signedTxn } = req.body;
 
       if (!signedTxn) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Signed transaction is required' 
+          error: "Signed transaction is required",
         });
       }
 
@@ -209,13 +215,13 @@ class NFTController {
 
       res.status(200).json({
         success: true,
-        data: result
+        data: result,
       });
     } catch (error) {
-      console.error('Submit transaction error:', error);
-      res.status(500).json({ 
+      console.error("Submit transaction error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -228,9 +234,9 @@ class NFTController {
       const { assetId } = req.params;
 
       if (!assetId) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Asset ID is required' 
+          error: "Asset ID is required",
         });
       }
 
@@ -238,13 +244,13 @@ class NFTController {
 
       res.status(200).json({
         success: true,
-        data: assetInfo
+        data: assetInfo,
       });
     } catch (error) {
-      console.error('Get NFT details error:', error);
-      res.status(500).json({ 
+      console.error("Get NFT details error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -257,9 +263,9 @@ class NFTController {
       const { address } = req.body;
 
       if (!address) {
-        return res.status(400).json({ 
+        return res.status(400).json({
           success: false,
-          error: 'Address is required' 
+          error: "Address is required",
         });
       }
 
@@ -267,13 +273,13 @@ class NFTController {
 
       res.status(200).json({
         success: true,
-        data: transaction
+        data: transaction,
       });
     } catch (error) {
-      console.error('Opt-in error:', error);
-      res.status(500).json({ 
+      console.error("Opt-in error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
@@ -288,18 +294,18 @@ class NFTController {
       res.status(200).json({
         success: true,
         data: {
-          message: 'Use Algorand Indexer to query marketplace listings',
-          tip: 'Filter by app_id and look for local state with price > 0'
-        }
+          message: "Use Algorand Indexer to query marketplace listings",
+          tip: "Filter by app_id and look for local state with price > 0",
+        },
       });
     } catch (error) {
-      console.error('Get marketplace error:', error);
-      res.status(500).json({ 
+      console.error("Get marketplace error:", error);
+      res.status(500).json({
         success: false,
-        error: error.message 
+        error: error.message,
       });
     }
   }
 }
 
-module.exports = new NFTController();
+export default new NFTController();

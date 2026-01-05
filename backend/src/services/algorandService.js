@@ -1,15 +1,20 @@
-const algosdk = require('algosdk');
+import algosdk from "algosdk";
 
 class AlgorandService {
   constructor() {
     // Algorand TestNet configuration
-    this.algodToken = process.env.ALGOD_TOKEN || '';
-    this.algodServer = process.env.ALGOD_SERVER || 'https://testnet-api.algonode.cloud';
-    this.algodPort = process.env.ALGOD_PORT || '';
-    
+    this.algodToken = process.env.ALGOD_TOKEN || "";
+    this.algodServer =
+      process.env.ALGOD_SERVER || "https://testnet-api.algonode.cloud";
+    this.algodPort = process.env.ALGOD_PORT || "";
+
     // Initialize Algod client
-    this.algodClient = new algosdk.Algodv2(this.algodToken, this.algodServer, this.algodPort);
-    
+    this.algodClient = new algosdk.Algodv2(
+      this.algodToken,
+      this.algodServer,
+      this.algodPort
+    );
+
     // Application ID (set after deployment)
     this.appId = parseInt(process.env.APP_ID) || 0;
   }
@@ -19,12 +24,14 @@ class AlgorandService {
    */
   async getAccountInfo(address) {
     try {
-      const accountInfo = await this.algodClient.accountInformation(address).do();
+      const accountInfo = await this.algodClient
+        .accountInformation(address)
+        .do();
       return {
         address: accountInfo.address,
         amount: accountInfo.amount,
         assets: accountInfo.assets || [],
-        appsLocalState: accountInfo['apps-local-state'] || []
+        appsLocalState: accountInfo["apps-local-state"] || [],
       };
     } catch (error) {
       throw new Error(`Failed to get account info: ${error.message}`);
@@ -39,15 +46,17 @@ class AlgorandService {
       const { creator, name, type, purchasable, price, metadata } = params;
 
       // Get suggested params
-      const suggestedParams = await this.algodClient.getTransactionParams().do();
+      const suggestedParams = await this.algodClient
+        .getTransactionParams()
+        .do();
 
       // Prepare application arguments
       const appArgs = [
-        new Uint8Array(Buffer.from('mint_nft')),
+        new Uint8Array(Buffer.from("mint_nft")),
         new Uint8Array(Buffer.from(name)),
         new Uint8Array(Buffer.from(type)),
         algosdk.encodeUint64(purchasable ? 1 : 0),
-        algosdk.encodeUint64(price || 0)
+        algosdk.encodeUint64(price || 0),
       ];
 
       // Create application call transaction
@@ -59,8 +68,10 @@ class AlgorandService {
       );
 
       return {
-        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64'),
-        txnId: txn.txID()
+        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString(
+          "base64"
+        ),
+        txnId: txn.txID(),
       };
     } catch (error) {
       throw new Error(`Failed to create mint transaction: ${error.message}`);
@@ -72,11 +83,16 @@ class AlgorandService {
    */
   async createNFTAsset(params) {
     try {
-      const { creator, assetName, unitName, total, decimals, url, metadata } = params;
+      const { creator, assetName, unitName, total, decimals, url, metadata } =
+        params;
       if (!creator) {
-        throw new Error('Creator address must be provided to create an NFT asset.');
+        throw new Error(
+          "Creator address must be provided to create an NFT asset."
+        );
       }
-      const suggestedParams = await this.algodClient.getTransactionParams().do();
+      const suggestedParams = await this.algodClient
+        .getTransactionParams()
+        .do();
 
       // Create asset configuration transaction
       const txn = algosdk.makeAssetCreateTxnWithSuggestedParamsFromObject({
@@ -84,19 +100,23 @@ class AlgorandService {
         total: total || 1,
         decimals: decimals || 0,
         assetName: assetName,
-        unitName: unitName || 'NFT',
-        assetURL: url || '',
-        assetMetadataHash: metadata ? new Uint8Array(Buffer.from(metadata)) : undefined,
+        unitName: unitName || "NFT",
+        assetURL: url || "",
+        assetMetadataHash: metadata
+          ? new Uint8Array(Buffer.from(metadata))
+          : undefined,
         defaultFrozen: false,
         freeze: undefined,
         manager: creator,
         clawback: undefined,
         reserve: undefined,
-        suggestedParams
+        suggestedParams,
       });
       return {
-        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64'),
-        txnId: txn.txID()
+        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString(
+          "base64"
+        ),
+        txnId: txn.txID(),
       };
     } catch (error) {
       throw new Error(`Failed to create NFT asset: ${error.message}`);
@@ -110,11 +130,13 @@ class AlgorandService {
     try {
       const { seller, price } = params;
 
-      const suggestedParams = await this.algodClient.getTransactionParams().do();
+      const suggestedParams = await this.algodClient
+        .getTransactionParams()
+        .do();
 
       const appArgs = [
-        new Uint8Array(Buffer.from('list_nft')),
-        algosdk.encodeUint64(price)
+        new Uint8Array(Buffer.from("list_nft")),
+        algosdk.encodeUint64(price),
       ];
 
       const txn = algosdk.makeApplicationNoOpTxn(
@@ -125,8 +147,10 @@ class AlgorandService {
       );
 
       return {
-        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64'),
-        txnId: txn.txID()
+        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString(
+          "base64"
+        ),
+        txnId: txn.txID(),
       };
     } catch (error) {
       throw new Error(`Failed to create list transaction: ${error.message}`);
@@ -140,7 +164,9 @@ class AlgorandService {
     try {
       const { buyer, seller, price, platformFee } = params;
 
-      const suggestedParams = await this.algodClient.getTransactionParams().do();
+      const suggestedParams = await this.algodClient
+        .getTransactionParams()
+        .do();
 
       // Calculate amounts
       const feeAmount = Math.floor((price * platformFee) / 10000);
@@ -151,18 +177,18 @@ class AlgorandService {
         from: buyer,
         to: process.env.PLATFORM_WALLET,
         amount: feeAmount,
-        suggestedParams
+        suggestedParams,
       });
 
       const paymentTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
         from: buyer,
         to: seller,
         amount: sellerAmount,
-        suggestedParams
+        suggestedParams,
       });
 
       // Create application call transaction
-      const appArgs = [new Uint8Array(Buffer.from('buy_nft'))];
+      const appArgs = [new Uint8Array(Buffer.from("buy_nft"))];
       const accounts = [seller];
 
       const appCallTxn = algosdk.makeApplicationNoOpTxn(
@@ -178,10 +204,10 @@ class AlgorandService {
       algosdk.assignGroupID(txnGroup);
 
       return {
-        txns: txnGroup.map(txn => 
-          Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64')
+        txns: txnGroup.map((txn) =>
+          Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString("base64")
         ),
-        groupId: Buffer.from(txnGroup[0].group).toString('base64')
+        groupId: Buffer.from(txnGroup[0].group).toString("base64"),
       };
     } catch (error) {
       throw new Error(`Failed to create buy transaction: ${error.message}`);
@@ -193,15 +219,17 @@ class AlgorandService {
    */
   async submitTransaction(signedTxn) {
     try {
-      const txnBuffer = Buffer.from(signedTxn, 'base64');
-      const { txId } = await this.algodClient.sendRawTransaction(txnBuffer).do();
-      
+      const txnBuffer = Buffer.from(signedTxn, "base64");
+      const { txId } = await this.algodClient
+        .sendRawTransaction(txnBuffer)
+        .do();
+
       // Wait for confirmation
       const confirmedTxn = await this.waitForConfirmation(txId);
-      
+
       return {
         txId,
-        confirmedRound: confirmedTxn['confirmed-round']
+        confirmedRound: confirmedTxn["confirmed-round"],
       };
     } catch (error) {
       throw new Error(`Failed to submit transaction: ${error.message}`);
@@ -213,7 +241,11 @@ class AlgorandService {
    */
   async waitForConfirmation(txId, timeout = 10) {
     try {
-      const status = await algosdk.waitForConfirmation(this.algodClient, txId, timeout);
+      const status = await algosdk.waitForConfirmation(
+        this.algodClient,
+        txId,
+        timeout
+      );
       return status;
     } catch (error) {
       throw new Error(`Transaction not confirmed: ${error.message}`);
@@ -225,9 +257,11 @@ class AlgorandService {
    */
   async getApplicationState(address) {
     try {
-      const accountInfo = await this.algodClient.accountInformation(address).do();
-      const localState = accountInfo['apps-local-state']?.find(
-        app => app.id === this.appId
+      const accountInfo = await this.algodClient
+        .accountInformation(address)
+        .do();
+      const localState = accountInfo["apps-local-state"]?.find(
+        (app) => app.id === this.appId
       );
 
       if (!localState) {
@@ -235,16 +269,16 @@ class AlgorandService {
       }
 
       const state = {};
-      localState['key-value']?.forEach(kv => {
-        const key = Buffer.from(kv.key, 'base64').toString();
+      localState["key-value"]?.forEach((kv) => {
+        const key = Buffer.from(kv.key, "base64").toString();
         let value;
-        
+
         if (kv.value.type === 1) {
-          value = Buffer.from(kv.value.bytes, 'base64').toString();
+          value = Buffer.from(kv.value.bytes, "base64").toString();
         } else {
           value = kv.value.uint;
         }
-        
+
         state[key] = value;
       });
 
@@ -263,7 +297,7 @@ class AlgorandService {
       return {
         index: assetInfo.index,
         params: assetInfo.params,
-        createdAtRound: assetInfo['created-at-round']
+        createdAtRound: assetInfo["created-at-round"],
       };
     } catch (error) {
       throw new Error(`Failed to get asset info: ${error.message}`);
@@ -275,7 +309,9 @@ class AlgorandService {
    */
   async createOptInTransaction(address) {
     try {
-      const suggestedParams = await this.algodClient.getTransactionParams().do();
+      const suggestedParams = await this.algodClient
+        .getTransactionParams()
+        .do();
 
       const txn = algosdk.makeApplicationOptInTxn(
         address,
@@ -284,8 +320,10 @@ class AlgorandService {
       );
 
       return {
-        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString('base64'),
-        txnId: txn.txID()
+        txn: Buffer.from(algosdk.encodeUnsignedTransaction(txn)).toString(
+          "base64"
+        ),
+        txnId: txn.txID(),
       };
     } catch (error) {
       throw new Error(`Failed to create opt-in transaction: ${error.message}`);
@@ -293,4 +331,4 @@ class AlgorandService {
   }
 }
 
-module.exports = new AlgorandService();
+export default new AlgorandService();

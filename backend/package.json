@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "AlgoMint NFT Marketplace Backend API",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",

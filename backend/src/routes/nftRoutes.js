@@ -1,21 +1,22 @@
-const express = require('express');
+import express from "express";
+import nftController from "../controllers/nftController.js";
+
 const router = express.Router();
-const nftController = require('../controllers/nftController');
 
 // Account routes
-router.get('/account/:address', nftController.getAccount);
+router.get("/account/:address", nftController.getAccount);
 
 // NFT operations
-router.post('/mint', nftController.mintNFT);
-router.post('/list', nftController.listNFT);
-router.post('/buy', nftController.buyNFT);
-router.get('/details/:assetId', nftController.getNFTDetails);
+router.post("/mint", nftController.mintNFT);
+router.post("/list", nftController.listNFT);
+router.post("/buy", nftController.buyNFT);
+router.get("/details/:assetId", nftController.getNFTDetails);
 
 // Transaction operations
-router.post('/submit', nftController.submitTransaction);
-router.post('/opt-in', nftController.optIn);
+router.post("/submit", nftController.submitTransaction);
+router.post("/opt-in", nftController.optIn);
 
 // Marketplace
-router.get('/marketplace', nftController.getMarketplace);
+router.get("/marketplace", nftController.getMarketplace);
 
-module.exports = router;
+export { router };
