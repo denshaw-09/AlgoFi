@@ -129,7 +129,7 @@ Each operation is triggered via `Txn.application_args[0]`.
 
 ---
 
-##  Compilation
+##  Compilation & Deployment
 
 Run the script to compile PyTeal → TEAL:
 
@@ -141,6 +141,10 @@ Outputs:
 
 * `approval.teal`
 * `clear.teal`
+
+To deploy the contracts:
+
+python deploy.py
 
 ---
 
