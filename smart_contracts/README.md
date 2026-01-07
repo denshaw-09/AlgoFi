@@ -1,15 +1,14 @@
 # Smart Contracts — AlgoFi NFT Marketplace
 
-This folder contains the **PyTeal smart contracts** that power the NFT minting and marketplace logic on **Algorand**. The contracts manage NFT creation, listing, pricing, and secure purchases with platform fees.
+This folder contains the smart contract logic used by the AlgoFi NFT marketplace on Algorand.  
+It handles NFT listing, pricing, ownership transfer, and marketplace rules.
 
 ---
 
 ## Overview
 
-* **Language:** PyTeal
 * **Chain:** Algorand
 * **Contract Type:** Application (Stateful Smart Contract)
-* **Artifacts Generated:** `approval.teal`, `clear.teal`
 
 The contract stores NFT metadata in **local state** and marketplace configuration in **global state**.
 
@@ -17,9 +16,9 @@ The contract stores NFT metadata in **local state** and marketplace configuratio
 
 ## Files
 
-* `approval_program.py` – Main application logic (mint, list, buy, update, delist)
-* `approval.teal` – Compiled approval program
+* `approval.teal` – Approval program logic
 * `clear.teal` – Clear-state program (always approves)
+* `deploy.py` – Deployment script for the smart contract
 
 ---
 
@@ -49,68 +48,23 @@ The contract stores NFT metadata in **local state** and marketplace configuratio
 
 Each operation is triggered via `Txn.application_args[0]`.
 
-### 1 Initialize
+### Initialize
+Sets the contract owner, initializes the NFT counter, and sets the platform fee.
 
-**Signature:** `initialize()`
+### Mint NFT
+Creates a new NFT and stores metadata in local state.
 
-* Sets the contract owner
-* Initializes NFT counter
-* Sets default platform fee (2.5%)
+### List NFT
+Lists an owned NFT for sale with a valid price.
 
----
+### Buy NFT
+Purchases a listed NFT using grouped payment transactions and applies the platform fee.
 
-### 2 Mint NFT
+### Update Price
+Updates the price of a listed NFT.
 
-**Signature:** `mint_nft(name, type, purchasable, price)`
-
-* Creates a new NFT
-* Validates NFT type and price
-* Stores metadata in creator’s local state
-* Increments global NFT count
-
----
-
-### 3 List NFT
-
-**Signature:** `list_nft(price)`
-
-* Lists an owned NFT for sale
-* Only the creator can list
-* Requires a valid, non-zero price
-
----
-
-### 4 Buy NFT
-
-**Signature:** `buy_nft(seller_address)`
-
-* Purchases a listed NFT
-* Requires grouped payment transactions:
-
-  * Payment to seller
-  * Platform fee to owner
-* Transfers NFT metadata to buyer
-* Clears seller’s local state
-
----
-
-### 5 Update Price
-
-**Signature:** `update_price(new_price)`
-
-* Updates listing price
-* Only creator can update
-* NFT must be purchasable
-
----
-
-### 6 Delist NFT
-
-**Signature:** `delist_nft()`
-
-* Removes NFT from sale
-* Resets price to `0`
-* Creator-only action
+### Delist NFT
+Removes an NFT from sale.
 
 ---
 
@@ -119,35 +73,13 @@ Each operation is triggered via `Txn.application_args[0]`.
 * Creator-only checks for listing and updates
 * Strict transaction group validation for purchases
 * Platform fee enforced at protocol level
-* No private keys or secrets stored in contract
+* No private keys or secrets stored in the contract
 
 ---
 
-## Clear State Program
+## Deployment
 
-`clear_state_program()` always approves, allowing users to safely clear local state when required.
-
----
-
-##  Compilation & Deployment
-
-Run the script to compile PyTeal → TEAL:
+To deploy the smart contract:
 
 ```bash
-python approval_program.py
-```
-
-Outputs:
-
-* `approval.teal`
-* `clear.teal`
-
-To deploy the contracts:
-
 python deploy.py
-
----
-
-## Note
-
-This documentation explains contract logic for **understanding and contribution purposes only**. Always audit and test contracts thoroughly before deploying to mainnet.     
