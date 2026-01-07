@@ -6,6 +6,7 @@ import Home from './views/Home';
 import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
 import { ThemeProvider } from './context/ThemeContext';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -111,7 +112,7 @@ function App() {
               />
             </Routes>
           </main>
-
+          <ScrollToTop />
           <footer className="bg-white/50 dark:bg-slate-900/50 backdrop-blur-lg border-t border-purple-200 dark:border-purple-500/20 mt-20 transition-colors duration-300">
             <div className="container mx-auto px-4 py-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -161,7 +162,7 @@ function App() {
                         href="https://testnet.algoexplorer.io/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-purple-400 transition"
+                        className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition"
                       >
                         TestNet Explorer
                       </a>
@@ -171,7 +172,7 @@ function App() {
                         href="https://bank.testnet.algorand.network/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-400 hover:text-purple-400 transition"
+                        className="text-slate-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition"
                       >
                         TestNet Dispenser
                       </a>

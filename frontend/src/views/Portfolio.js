@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import NFTCard from '../components/NFTCard';
 
@@ -16,19 +16,11 @@ function Portfolio({ account, connected }) {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('owned');
 
-  useEffect(() => {
-    if (account && connected) {
-      fetchPortfolio();
-    } else {
-      setLoading(false);
-    }
-  }, [account, connected]);
-
-  const fetchPortfolio = async () => {
+  const fetchPortfolio = useCallback(async () => {
     setLoading(true);
     try {
       // In production, fetch from backend/indexer
-      const response = await axios.get(`${API_URL}/nfts/account/${account}`);
+      await axios.get(`${API_URL}/nfts/account/${account}`);
 
       // Mock data for demonstration
       const mockNfts = [
@@ -70,7 +62,15 @@ function Portfolio({ account, connected }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [account]);
+
+  useEffect(() => {
+    if (account && connected) {
+      fetchPortfolio();
+    } else {
+      setLoading(false);
+    }
+  }, [account, connected, fetchPortfolio]);
 
   const formatPrice = (microAlgos) => {
     return (microAlgos / 1000000).toFixed(2);
@@ -82,7 +82,7 @@ function Portfolio({ account, connected }) {
   if (!connected || !account) {
     return (
       <div className="max-w-2xl mx-auto text-center py-20">
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-2xl p-12 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-2xl p-12 border border-purple-200 dark:border-purple-500/20 hover-glitter">
           <div className="text-6xl mb-6">👛</div>
           <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">
             Connect Your Wallet
@@ -109,23 +109,23 @@ function Portfolio({ account, connected }) {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20 transition transform duration-300 hover:scale-105 hover-glitter cursor-default">
           <p className="text-slate-600 dark:text-gray-400 text-sm mb-1">Total NFTs</p>
           <p className="text-3xl font-bold text-slate-900 dark:text-white">{stats.totalNfts}</p>
         </div>
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20 transition transform duration-300 hover:scale-105 hover-glitter cursor-default">
           <p className="text-slate-600 dark:text-gray-400 text-sm mb-1">🎨 Art</p>
           <p className="text-3xl font-bold text-purple-600 dark:text-purple-400">{stats.artNfts}</p>
         </div>
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20 transition transform duration-300 hover:scale-105 hover-glitter cursor-default">
           <p className="text-slate-600 dark:text-gray-400 text-sm mb-1">🎵 Music</p>
           <p className="text-3xl font-bold text-pink-600 dark:text-pink-400">{stats.musicNfts}</p>
         </div>
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20 transition transform duration-300 hover:scale-105 hover-glitter cursor-default">
           <p className="text-slate-600 dark:text-gray-400 text-sm mb-1">💎 Standard</p>
           <p className="text-3xl font-bold text-blue-600 dark:text-blue-400">{stats.standardNfts}</p>
         </div>
-        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20">
+        <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl p-6 border border-purple-200 dark:border-purple-500/20 transition transform duration-300 hover:scale-105 hover-glitter cursor-default">
           <p className="text-slate-600 dark:text-gray-400 text-sm mb-1">Total Value</p>
           <p className="text-2xl font-bold text-green-600 dark:text-green-400">{formatPrice(stats.totalValue)} ALGO</p>
         </div>
@@ -270,14 +270,14 @@ function Portfolio({ account, connected }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a
             href="/"
-            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center"
+            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center hover-glitter hover:scale-105 transform duration-300"
           >
             <div className="text-4xl mb-2">🎨</div>
             <p className="text-slate-900 dark:text-white font-medium">Mint New NFT</p>
           </a>
           <a
             href="/marketplace"
-            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center"
+            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center hover-glitter hover:scale-105 transform duration-300"
           >
             <div className="text-4xl mb-2">🛒</div>
             <p className="text-slate-900 dark:text-white font-medium">Browse Marketplace</p>
@@ -286,7 +286,7 @@ function Portfolio({ account, connected }) {
             href={`https://testnet.algoexplorer.io/address/${account}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center"
+            className="p-6 bg-white/60 dark:bg-slate-800/50 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-xl border border-purple-200 dark:border-purple-500/20 transition text-center hover-glitter hover:scale-105 transform duration-300"
           >
             <div className="text-4xl mb-2">🔍</div>
             <p className="text-slate-900 dark:text-white font-medium">View on Explorer</p>

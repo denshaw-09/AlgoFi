@@ -73,3 +73,40 @@ code {
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
 }
+
+/* Glitter Effect */
+@keyframes glitter {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.hover-glitter {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-glitter::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg) translateX(-250%);
+  transition: transform 0s;
+  pointer-events: none;
+}
+
+.hover-glitter:hover::after {
+  animation: glitter 0.8s ease-in-out;
+}

@@ -43,7 +43,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
   return (
     <>
-      <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-200 dark:border-purple-500/20 hover:border-purple-500/50 transition group">
+      <div className="bg-white/60 dark:bg-slate-800/50 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-200 dark:border-purple-500/20 hover:border-purple-500/50 transition group hover-glitter hover:shadow-2xl hover:shadow-purple-500/20 relative">
         {/* Image */}
         <div className="relative aspect-square overflow-hidden bg-slate-100 dark:bg-slate-700/50">
           {nft.imageUrl ? (

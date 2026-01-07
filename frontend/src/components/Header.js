@@ -27,9 +27,6 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            {/* <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <span className="text-2xl">🎨</span>
-            </div> */}
             <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               AlgoFi
             </span>
@@ -72,7 +69,7 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
               <button
                 onClick={connectWallet}
                 disabled={loading}
-                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-medium transition disabled:opacity-50 disabled:cursor-not-allowed hover-glitter hover:scale-105 transform duration-300"
               >
                 {loading ? 'Connecting...' : 'Connect Wallet'}
               </button>
@@ -111,8 +108,8 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-2 rounded-lg font-medium transition ${isActive(link.path)
-                    ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
-                    : 'text-slate-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-400'
+                  ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
+                  : 'text-slate-600 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-500/10 hover:text-purple-600 dark:hover:text-purple-400'
                   }`}
               >
                 {link.label}
