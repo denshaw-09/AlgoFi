@@ -97,7 +97,10 @@ This Code of Conduct is adapted from the [Contributor Covenant](https://www.cont
 
 ## 7. Contact / Maintainers
 
-If you want to discuss the Code of Conduct or the enforcement policy, contact the maintainers
+If you want to discuss the Code of Conduct or report a concern, contact the project maintainers via:
+
+- GitHub Issues or Discussions
+- Discord (private message to a maintainer or moderator)
 
 ## 8. Changes
 
