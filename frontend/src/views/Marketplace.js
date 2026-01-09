@@ -8,6 +8,7 @@ function Marketplace({ account, connected }) {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [priceFilters, setPriceFilters] = useState([]);
 
   // Mock data - In production, fetch from indexer or backend
   useEffect(() => {
@@ -98,17 +99,28 @@ function Marketplace({ account, connected }) {
       );
     }
 
-    // Sort
-    if (sortBy === 'price-low') {
-      result.sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'price-high') {
-      result.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'newest') {
-      result.sort((a, b) => b.id - a.id);
-    }
+    // 🔹 Price-based filters
+    if (priceFilters.length > 0) {
+      result = result.filter(nft => {
+        return (
+          (priceFilters.includes('free') && nft.price === 0) ||
+          (priceFilters.includes('paid') && nft.price > 0) ||
+          (priceFilters.includes('purchasable') && nft.purchasable)
+        );
+      });
+  }
 
-    setFilteredNfts(result);
-  }, [filter, searchQuery, sortBy, nfts]);
+  // Sort
+  if (sortBy === 'price-low') {
+    result.sort((a, b) => a.price - b.price);
+  } else if (sortBy === 'price-high') {
+    result.sort((a, b) => b.price - a.price);
+  } else if (sortBy === 'newest') {
+    result.sort((a, b) => b.id - a.id);
+  }
+
+  setFilteredNfts(result);
+}, [filter, searchQuery, sortBy, priceFilters, nfts]);
 
   const filterOptions = [
     { value: 'all', label: 'All NFTs', icon: '🌟' },
@@ -117,6 +129,20 @@ function Marketplace({ account, connected }) {
     { value: 'standard', label: 'Standard', icon: '💎' }
   ];
 
+  const priceFilterOptions = [
+  { value: 'free', label: 'Free', icon: '🆓' },
+  { value: 'paid', label: 'Paid', icon: '💰' },
+  { value: 'purchasable', label: 'Purchasable', icon: '🛒' }
+];
+
+const togglePriceFilter = (value) => {
+  setPriceFilters(prev =>
+    prev.includes(value)
+      ? prev.filter(v => v !== value)
+      : [...prev, value]
+  );
+};
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -124,6 +150,7 @@ function Marketplace({ account, connected }) {
         <h1 className="text-5xl font-bold text-white mb-4">
           Explore Marketplace
         </h1>
+
         <p className="text-xl text-gray-300">
           Discover unique NFTs from talented creators
         </p>
@@ -173,22 +200,44 @@ function Marketplace({ account, connected }) {
         </div>
       </div>
 
-      {/* Filter Pills */}
-      <div className="flex flex-wrap gap-3">
-        {filterOptions.map(option => (
-          <button
-            key={option.value}
-            onClick={() => setFilter(option.value)}
-            className={`px-4 py-2 rounded-lg font-medium transition ${
-              filter === option.value
-                ? 'bg-purple-500 text-white'
-                : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700'
-            }`}
-          >
-            {option.icon} {option.label}
-          </button>
-        ))}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+  
+        {/* Type Filter Pills (Left) */}
+        <div className="flex flex-wrap gap-3">
+          {filterOptions.map(option => (
+            <button
+              key={option.value}
+              onClick={() => setFilter(option.value)}
+              className={`px-4 py-2 rounded-lg font-medium transition ${
+                filter === option.value
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700'
+              }`}
+            >
+              {option.icon} {option.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Price Filters (Right) */}
+        <div className="flex flex-wrap gap-3">
+          {priceFilterOptions.map(option => (
+            <button
+              key={option.value}
+              onClick={() => togglePriceFilter(option.value)}
+              className={`px-4 py-2 rounded-lg font-medium transition ${
+                priceFilters.includes(option.value)
+                  ? 'bg-purple-500 text-white'
+                  : 'bg-slate-800/50 text-gray-300 hover:bg-slate-700'
+              }`}
+            >
+              {option.icon} {option.label}
+            </button>
+          ))}
+        </div>
+
       </div>
+
 
       {/* Results Count */}
       <div className="text-gray-300">
