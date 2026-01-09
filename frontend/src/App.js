@@ -157,7 +157,7 @@ function App() {
                   </li>
                   <li>
                     <a 
-                      href="https://testnet.algoexplorer.io/" 
+                      href="https://lora.algokit.io/testnet" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="text-gray-400 hover:text-purple-400 transition"
