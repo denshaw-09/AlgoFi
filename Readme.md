@@ -340,8 +340,7 @@ For discussions, questions, or onboarding help, join us on **Discord**:
 If you need help or have questions:
 
 - Open an issue on the GitHub repository
-- Join our community on **Discord** for discussions and contributor support  
-  👉 **Discord:** <DISCORD_LINK>(https://discord.gg/VcbbKWC9Xc)
+- Join our community on **Discord** for discussions and contributor support.
 
 ---
 
