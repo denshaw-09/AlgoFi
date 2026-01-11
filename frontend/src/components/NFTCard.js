@@ -43,9 +43,9 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
   return (
     <>
-      <div className="bg-slate-800/50 backdrop-blur-lg rounded-xl overflow-hidden border border-purple-500/20 hover:border-purple-500/50 transition group hover-glitter hover:shadow-2xl hover:shadow-purple-500/20 relative">
-        {/* Image */}
-        <div className="relative aspect-square overflow-hidden bg-slate-700/50">
+      <div className="card-sketch overflow-hidden group relative flex flex-col h-full">
+        {/* img container */}
+        <div className="relative aspect-square overflow-hidden bg-[#292524] border-b-4 border-[#3e3834]">
           {nft.imageUrl ? (
             <img
               src={nft.imageUrl}
@@ -54,80 +54,82 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
-              <span className="text-6xl">{typeEmojis[nft.type] || '💎'}</span>
+              <span className="text-8xl">{typeEmojis[nft.type] || '💎'}</span>
             </div>
           )}
 
-          {/* Type Badge */}
+          {/* type tag */}
           <div className="absolute top-3 right-3">
-            <span className="px-3 py-1 bg-black/60 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
+            <span className="px-3 py-1 bg-[#292524] rounded-lg text-xs font-bold text-[#fca311] border-2 border-[#f3e9d2] shadow-[2px_2px_0px_0px_#000]">
               {typeEmojis[nft.type]} {nft.type.toUpperCase()}
             </span>
           </div>
 
-          {/* Purchasable Badge */}
+          {/* purchasable tag */}
           {!nft.purchasable && (
             <div className="absolute top-3 left-3">
-              <span className="px-3 py-1 bg-green-500/80 backdrop-blur-sm rounded-full text-xs font-bold text-white">
+              <span className="px-3 py-1 bg-[#f3e9d2] rounded-lg text-xs font-bold text-[#292524] border-2 border-[#292524] shadow-[2px_2px_0px_0px_#000]">
                 FREE
               </span>
             </div>
           )}
         </div>
 
-        {/* Details */}
-        <div className="p-5">
-          <h3 className="text-xl font-bold text-white mb-2 truncate">
+        {/* details */}
+        <div className="p-5 flex flex-col flex-grow">
+          <h3 className="text-2xl font-bold text-[#292524] mb-2 truncate font-['Fredoka_One']">
             {nft.name}
           </h3>
 
           {nft.description && (
-            <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+            <p className="text-gray-600 text-sm mb-4 line-clamp-2 font-bold">
               {nft.description}
             </p>
           )}
 
-          {/* Creator */}
-          <div className="flex items-center space-x-2 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-              <span className="text-xs">👤</span>
-            </div>
-            <div>
-              <p className="text-xs text-gray-500">Creator</p>
-              <p className="text-sm text-gray-300 font-medium">
-                {nft.creator?.slice(0, 6)}...{nft.creator?.slice(-4)}
-              </p>
-            </div>
-          </div>
-
-          {/* Price or Free */}
-          <div className="border-t border-purple-500/20 pt-4">
-            {nft.purchasable && nft.price > 0 ? (
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs text-gray-500">Price</p>
-                  <p className="text-2xl font-bold text-purple-400">
-                    {formatPrice(nft.price)} <span className="text-lg">ALGO</span>
-                  </p>
-                </div>
-
-                {showActions && account && account !== nft.creator && (
-                  <button
-                    onClick={() => setShowBuyModal(true)}
-                    disabled={loading}
-                    className="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-bold transition disabled:opacity-50"
-                  >
-                    Buy Now
-                  </button>
-                )}
+          <div className="mt-auto">
+            {/* creator */}
+            <div className="flex items-center space-x-2 mb-4 bg-[#e5dac1] p-2 rounded-lg border border-[#3e3834]">
+              <div className="w-8 h-8 bg-[#fca311] rounded-full flex items-center justify-center border border-black">
+                <span className="text-xs">👤</span>
               </div>
-            ) : (
-              <div className="text-center">
-                <p className="text-gray-400 text-sm">
-                  {nft.purchasable ? 'Not listed for sale' : 'Non-purchasable collectible'}
+              <div>
+                <p className="text-xs text-gray-600 font-bold">Creator</p>
+                <p className="text-sm text-[#292524] font-mono font-bold">
+                  {nft.creator?.slice(0, 6)}...{nft.creator?.slice(-4)}
                 </p>
               </div>
-            )}
+            </div>
+
+            {/* Price or Free */}
+            <div className="border-t-2 border-[#3e3834] pt-4">
+              {nft.purchasable && nft.price > 0 ? (
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-600 font-bold">Price</p>
+                    <p className="text-2xl font-bold text-[#292524]">
+                      {formatPrice(nft.price)} <span className="text-lg text-[#fca311]">ALGO</span>
+                    </p>
+                  </div>
+
+                  {showActions && account && account !== nft.creator && (
+                    <button
+                      onClick={() => setShowBuyModal(true)}
+                      disabled={loading}
+                      className="btn-sketch-primary text-sm px-4 py-2"
+                    >
+                      Buy Now
+                    </button>
+                  )}
+                </div>
+              ) : (
+                <div className="text-center">
+                  <p className="text-gray-500 text-sm font-bold italic">
+                    {nft.purchasable ? 'Not listed for sale' : 'Non-purchasable collectible'}
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -135,48 +137,48 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
       {/* Buy Confirmation Modal */}
       {showBuyModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-500/30">
-            <h3 className="text-2xl font-bold text-white mb-4">Confirm Purchase</h3>
+          <div className="card-sketch-dark p-8 max-w-md w-full">
+            <h3 className="text-3xl font-bold text-[#fca311] mb-6 text-center">Confirm Purchase</h3>
 
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between">
-                <span className="text-gray-400">NFT:</span>
-                <span className="text-white font-medium">{nft.name}</span>
+            <div className="space-y-4 mb-8 bg-[#1c1917] p-6 rounded-xl border-2 border-[#3e3834]">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400 text-lg">NFT:</span>
+                <span className="text-[#f3e9d2] font-bold text-xl">{nft.name}</span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Price:</span>
-                <span className="text-purple-400 font-bold">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400 text-lg">Price:</span>
+                <span className="text-[#fca311] font-bold text-xl">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Platform Fee (2.5%):</span>
-                <span className="text-gray-300">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400 text-lg">Fee (2.5%):</span>
+                <span className="text-gray-500 font-bold">
                   {formatPrice(nft.price * 0.025)} ALGO
                 </span>
               </div>
-              <div className="border-t border-purple-500/20 pt-4 flex justify-between">
-                <span className="text-white font-bold">Total:</span>
-                <span className="text-white font-bold">
+              <div className="border-t-2 border-[#3e3834] pt-4 flex justify-between items-center mt-4">
+                <span className="text-[#f3e9d2] font-bold text-xl">Total:</span>
+                <span className="text-[#f3e9d2] font-bold text-2xl">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>
             </div>
 
-            <div className="flex space-x-3">
+            <div className="flex space-x-4">
               <button
                 onClick={() => setShowBuyModal(false)}
                 disabled={loading}
-                className="flex-1 px-4 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg font-medium transition"
+                className="flex-1 btn-sketch-secondary"
               >
                 Cancel
               </button>
               <button
                 onClick={handleBuy}
                 disabled={loading}
-                className="flex-1 px-4 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-bold transition disabled:opacity-50"
+                className="flex-1 btn-sketch-primary"
               >
-                {loading ? 'Processing...' : 'Confirm'}
+                {loading ? '...' : 'Confirm'}
               </button>
             </div>
           </div>

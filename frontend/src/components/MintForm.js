@@ -69,6 +69,7 @@ function MintForm({ account, onMintSuccess }) {
         ? Math.floor(parseFloat(formData.price) * 1000000) 
         : 0;
 
+      // console log
       console.log('Submitting mint request:', {
         creator: account,
         name: formData.name,
@@ -125,25 +126,25 @@ function MintForm({ account, onMintSuccess }) {
   };
 
   return (
-    <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/20">
-      <h2 className="text-3xl font-bold text-white mb-6">Mint New NFT</h2>
+    <div className="card-sketch-dark p-8">
+      <h2 className="text-3xl font-bold text-[#fca311] mb-6 font-['Fredoka_One']">Mint New NFT</h2>
       
       {error && (
-        <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6">
-          <p className="text-red-400">{error}</p>
+        <div className="bg-red-900/20 border-2 border-red-500 rounded-xl p-4 mb-6">
+          <p className="text-red-400 font-bold">{error}</p>
         </div>
       )}
 
       {!account && (
-        <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4 mb-6">
-          <p className="text-yellow-400">⚠️ Please connect your wallet to mint NFTs</p>
+        <div className="bg-[#fca311]/20 border-2 border-[#fca311] rounded-xl p-4 mb-6">
+          <p className="text-[#fca311] font-bold">⚠️ Please connect your wallet to mint NFTs</p>
         </div>
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* File Upload */}
         <div>
-          <label className="block text-gray-300 font-medium mb-2">
+          <label className="block text-[#f3e9d2] font-bold mb-2 text-xl font-['Patrick_Hand']">
             Upload File *
           </label>
           <div className="relative">
@@ -157,30 +158,18 @@ function MintForm({ account, onMintSuccess }) {
             />
             <label
               htmlFor="file-upload"
-              className="flex items-center justify-center w-full h-40 border-2 border-dashed border-purple-500/50 rounded-lg cursor-pointer hover:border-purple-500 transition"
+              className="flex items-center justify-center w-full h-48 border-4 border-dashed border-[#fca311] bg-[#1c1917] rounded-xl cursor-pointer hover:bg-[#292524] transition shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]"
             >
               {preview ? (
                 <img 
                   src={preview} 
                   alt="Preview" 
-                  className="h-full w-full object-cover rounded-lg"
+                  className="h-full w-full object-contain rounded-lg p-2"
                 />
               ) : (
                 <div className="text-center">
-                  <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
-                    stroke="currentColor"
-                    fill="none"
-                    viewBox="0 0 48 48"
-                  >
-                    <path
-                      d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <p className="mt-2 text-gray-400">Click to upload file</p>
+                  <div className="text-5xl mb-2">📁</div>
+                  <p className="mt-2 text-[#f3e9d2] font-bold text-lg">Click to upload file</p>
                   <p className="text-sm text-gray-500">PNG, JPG, MP3, MP4</p>
                 </div>
               )}
@@ -190,7 +179,7 @@ function MintForm({ account, onMintSuccess }) {
 
         {/* NFT Name */}
         <div>
-          <label className="block text-gray-300 font-medium mb-2">
+          <label className="block text-[#f3e9d2] font-bold mb-2 text-xl font-['Patrick_Hand']">
             NFT Name *
           </label>
           <input
@@ -198,7 +187,7 @@ function MintForm({ account, onMintSuccess }) {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+            className="w-full px-4 py-3 input-sketch"
             placeholder="Enter NFT name"
             required
           />
@@ -206,14 +195,14 @@ function MintForm({ account, onMintSuccess }) {
 
         {/* NFT Type */}
         <div>
-          <label className="block text-gray-300 font-medium mb-2">
+          <label className="block text-[#f3e9d2] font-bold mb-2 text-xl font-['Patrick_Hand']">
             NFT Type *
           </label>
           <select
             name="type"
             value={formData.type}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500"
+            className="w-full px-4 py-3 input-sketch cursor-pointer"
             required
           >
             <option value="art">🎨 Art NFT</option>
@@ -222,9 +211,9 @@ function MintForm({ account, onMintSuccess }) {
           </select>
         </div>
 
-        {/* Description */}
+        {/* description */}
         <div>
-          <label className="block text-gray-300 font-medium mb-2">
+          <label className="block text-[#f3e9d2] font-bold mb-2 text-xl font-['Patrick_Hand']">
             Description
           </label>
           <textarea
@@ -232,30 +221,30 @@ function MintForm({ account, onMintSuccess }) {
             value={formData.description}
             onChange={handleInputChange}
             rows="4"
-            className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+            className="w-full px-4 py-3 input-sketch"
             placeholder="Describe your NFT..."
           />
         </div>
 
-        {/* Purchasable Toggle */}
-        <div className="flex items-center space-x-3">
+        {/* Purchasable toggle */}
+        <div className="flex items-center space-x-3 bg-[#1c1917] p-4 rounded-xl border-2 border-[#3e3834]">
           <input
             type="checkbox"
             name="purchasable"
             checked={formData.purchasable}
             onChange={handleInputChange}
-            className="w-5 h-5 rounded bg-slate-700 border-purple-500/30 text-purple-500 focus:ring-purple-500"
+            className="w-6 h-6 rounded bg-[#f3e9d2] border-[#3e3834] text-[#fca311] focus:ring-[#fca311] cursor-pointer"
             id="purchasable"
           />
-          <label htmlFor="purchasable" className="text-gray-300 font-medium cursor-pointer">
+          <label htmlFor="purchasable" className="text-[#f3e9d2] font-bold text-lg cursor-pointer">
             Make this NFT purchasable
           </label>
         </div>
 
         {/* Price (conditional) */}
         {formData.purchasable && (
-          <div>
-            <label className="block text-gray-300 font-medium mb-2">
+          <div className="animate-fade-in">
+            <label className="block text-[#f3e9d2] font-bold mb-2 text-xl font-['Patrick_Hand']">
               Price (ALGO) *
             </label>
             <input
@@ -265,11 +254,11 @@ function MintForm({ account, onMintSuccess }) {
               onChange={handleInputChange}
               step="0.000001"
               min="0"
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 input-sketch"
               placeholder="0.00"
               required={formData.purchasable}
             />
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-[#fca311] mt-2 font-bold">
               Platform fee: 2.5%
             </p>
           </div>
@@ -279,7 +268,7 @@ function MintForm({ account, onMintSuccess }) {
         <button
           type="submit"
           disabled={loading || !account}
-          className="w-full px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white rounded-lg font-bold text-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full btn-sketch-primary text-xl py-4"
         >
           {loading ? 'Minting...' : account ? 'Mint NFT' : 'Connect Wallet First'}
         </button>
