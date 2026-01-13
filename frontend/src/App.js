@@ -7,7 +7,9 @@ import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
 import ScrollToTop from './components/ScrollToTop';
 
-// bg assets 
+// AOS for animations
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Chains = () => (
   <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -142,6 +144,14 @@ function App() {
     };
   }, [peraWallet, handleDisconnectWallet]);
 
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-[#1c1917] relative selection:bg-[#fca311] selection:text-black">
@@ -178,7 +188,7 @@ function App() {
           <ScrollToTop />
           
           <footer className="mt-20 border-t-2 border-[#3e3834] bg-[#1c1917]/90 backdrop-blur-sm">
-            <div className="container mx-auto px-4 py-12">
+            <div data-aos="fade-up" className="container mx-auto px-4 py-12">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <h3 className="text-2xl text-[#f3e9d2] mb-4">AlgoFi</h3>
