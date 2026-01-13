@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NFTCard from '../components/NFTCard';
+import { NFTGridSkeleton } from '../components/SkeletonLoader';
+import { NoNFTsFound, EmptyMarketplace } from '../components/EmptyState';
 
 function Marketplace({ account, connected }) {
   const [nfts, setNfts] = useState([]);
@@ -8,6 +10,7 @@ function Marketplace({ account, connected }) {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [hasFilters, setHasFilters] = useState(false);
 
   // Mock data - In production, fetch from indexer or backend
   useEffect(() => {
@@ -84,6 +87,8 @@ function Marketplace({ account, connected }) {
   // Apply filters
   useEffect(() => {
     let result = [...nfts];
+    const filtersApplied = filter !== 'all' || searchQuery !== '';
+    setHasFilters(filtersApplied);
 
     // Type filter
     if (filter !== 'all') {
@@ -109,6 +114,13 @@ function Marketplace({ account, connected }) {
 
     setFilteredNfts(result);
   }, [filter, searchQuery, sortBy, nfts]);
+
+  // Clear all filters
+  const handleClearFilters = () => {
+    setFilter('all');
+    setSearchQuery('');
+    setSortBy('newest');
+  };
 
   const filterOptions = [
     { value: 'all', label: 'All NFTs', icon: '🌟' },
@@ -197,11 +209,14 @@ function Marketplace({ account, connected }) {
 
       {/* NFT Grid */}
       {loading ? (
-        <div className="text-center py-20">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#fca311]"></div>
-          <p className="text-gray-400 mt-4 text-xl">Loading marketplace...</p>
-        </div>
-      ) : filteredNfts.length > 0 ? (
+        <NFTGridSkeleton count={6} />
+      ) : filteredNfts.length === 0 ? (
+        nfts.length === 0 ? (
+          <EmptyMarketplace />
+        ) : (
+          <NoNFTsFound hasFilters={hasFilters} onClearFilters={handleClearFilters} />
+        )
+      ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredNfts.map(nft => (
             <NFTCard
@@ -211,14 +226,6 @@ function Marketplace({ account, connected }) {
               showActions={connected}
             />
           ))}
-        </div>
-      ) : (
-        <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Found</h3>
-          <p className="text-gray-400">
-            Try adjusting your filters or search query
-          </p>
         </div>
       )}
 

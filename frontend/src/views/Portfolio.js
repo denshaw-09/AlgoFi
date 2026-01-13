@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import NFTCard from '../components/NFTCard';
+import { NFTGridSkeleton, StatsCardSkeleton } from '../components/SkeletonLoader';
+import { EmptyPortfolio, EmptyCreatedNFTs } from '../components/EmptyState';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -108,28 +110,36 @@ function Portfolio({ account, connected }) {
       </div>
 
       {/* stats card */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
-          <p className="text-gray-400 text-sm mb-1">Total NFTs</p>
-          <p className="text-3xl font-bold text-white">{stats.totalNfts}</p>
+      {loading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {[...Array(5)].map((_, index) => (
+            <StatsCardSkeleton key={index} />
+          ))}
         </div>
-        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
-          <p className="text-gray-400 text-sm mb-1">🎨 Art</p>
-          <p className="text-3xl font-bold text-[#fca311]">{stats.artNfts}</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+            <p className="text-gray-400 text-sm mb-1">Total NFTs</p>
+            <p className="text-3xl font-bold text-white">{stats.totalNfts}</p>
+          </div>
+          <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+            <p className="text-gray-400 text-sm mb-1">🎨 Art</p>
+            <p className="text-3xl font-bold text-[#fca311]">{stats.artNfts}</p>
+          </div>
+          <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+            <p className="text-gray-400 text-sm mb-1">🎵 Music</p>
+            <p className="text-3xl font-bold text-pink-400">{stats.musicNfts}</p>
+          </div>
+          <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+            <p className="text-gray-400 text-sm mb-1">💎 Standard</p>
+            <p className="text-3xl font-bold text-blue-400">{stats.standardNfts}</p>
+          </div>
+          <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+            <p className="text-gray-400 text-sm mb-1">Total Value</p>
+            <p className="text-2xl font-bold text-green-400">{formatPrice(stats.totalValue)} ALGO</p>
+          </div>
         </div>
-        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
-          <p className="text-gray-400 text-sm mb-1">🎵 Music</p>
-          <p className="text-3xl font-bold text-pink-400">{stats.musicNfts}</p>
-        </div>
-        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
-          <p className="text-gray-400 text-sm mb-1">💎 Standard</p>
-          <p className="text-3xl font-bold text-blue-400">{stats.standardNfts}</p>
-        </div>
-        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
-          <p className="text-gray-400 text-sm mb-1">Total Value</p>
-          <p className="text-2xl font-bold text-green-400">{formatPrice(stats.totalValue)} ALGO</p>
-        </div>
-      </div>
+      )}
 
       {/* a/c info */}
       <div className="card-sketch-dark p-6">
@@ -180,10 +190,7 @@ function Portfolio({ account, connected }) {
 
       {/* NFT Grid */}
       {loading ? (
-        <div className="text-center py-20">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#fca311]"></div>
-          <p className="text-gray-400 mt-4 text-xl">Loading portfolio...</p>
-        </div>
+        <NFTGridSkeleton count={3} />
       ) : (
         <>
           {activeTab === 'owned' && (
@@ -200,27 +207,7 @@ function Portfolio({ account, connected }) {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-                  <div className="text-6xl mb-4">📦</div>
-                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Yet</h3>
-                  <p className="text-gray-400 mb-6">
-                    Start your collection by minting or purchasing NFTs
-                  </p>
-                  <div className="flex justify-center gap-4">
-                    <a
-                      href="/"
-                      className="btn-sketch-primary"
-                    >
-                      Mint NFT
-                    </a>
-                    <a
-                      href="/marketplace"
-                      className="btn-sketch-secondary"
-                    >
-                      Browse Marketplace
-                    </a>
-                  </div>
-                </div>
+                <EmptyPortfolio connected={connected} />
               )}
             </div>
           )}
@@ -245,19 +232,7 @@ function Portfolio({ account, connected }) {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-                  <div className="text-6xl mb-4">🎨</div>
-                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No Created NFTs</h3>
-                  <p className="text-gray-400 mb-6">
-                    Start creating by minting your first NFT
-                  </p>
-                  <a
-                    href="/"
-                    className="inline-block btn-sketch-primary"
-                  >
-                    Create Your First NFT
-                  </a>
-                </div>
+                <EmptyCreatedNFTs />
               )}
             </div>
           )}
