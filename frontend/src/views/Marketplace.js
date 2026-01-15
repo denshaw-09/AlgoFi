@@ -74,6 +74,96 @@ function Marketplace({ account, connected }) {
         purchasable: false,
         description: 'Free community supporter badge',
         imageUrl: 'https://images.unsplash.com/photo-1645604136298-0c5ab75630f4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172'
+      },
+      {
+        id: 7,
+        name: 'Digital Landscape',
+        type: 'art',
+        creator: 'ALGO321STU...PQR678',
+        price: 6200000,
+        purchasable: true,
+        description: 'Beautiful digital landscape artwork',
+        imageUrl: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1032'
+      },
+      {
+        id: 8,
+        name: 'Night Rhythms',
+        type: 'music',
+        creator: 'ALGO654VWX...STU901',
+        price: 3500000,
+        purchasable: true,
+        description: 'Ambient night music collection',
+        imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 9,
+        name: 'Founder Token',
+        type: 'standard',
+        creator: 'ALGO987YZA...VWX234',
+        price: 0,
+        purchasable: false,
+        description: 'Exclusive founder token for early supporters',
+        imageUrl: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1332'
+      },
+      {
+        id: 10,
+        name: 'Ocean Depths',
+        type: 'art',
+        creator: 'ALGO135BCD...YZA567',
+        price: 8900000,
+        purchasable: true,
+        description: 'Underwater exploration in digital art',
+        imageUrl: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 11,
+        name: 'Jazz Fusion',
+        type: 'music',
+        creator: 'ALGO468EFG...BCD890',
+        price: 4500000,
+        purchasable: true,
+        description: 'Modern jazz meets electronic fusion',
+        imageUrl: 'https://images.unsplash.com/photo-1415201364774-f6f0bb35f28f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 12,
+        name: 'Urban Dreams',
+        type: 'art',
+        creator: 'ALGO791HIJ...EFG123',
+        price: 5500000,
+        purchasable: true,
+        description: 'Cityscape meets surrealism',
+        imageUrl: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 13,
+        name: 'Electronic Symphony',
+        type: 'music',
+        creator: 'ALGO024KLM...HIJ456',
+        price: 2800000,
+        purchasable: true,
+        description: 'Experimental electronic soundscapes',
+        imageUrl: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 14,
+        name: 'Vintage Collection',
+        type: 'standard',
+        creator: 'ALGO357NOP...KLM789',
+        price: 0,
+        purchasable: false,
+        description: 'Limited edition vintage collectible',
+        imageUrl: 'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
+      },
+      {
+        id: 15,
+        name: 'Neon Nights',
+        type: 'art',
+        creator: 'ALGO680QRS...NOP012',
+        price: 7200000,
+        purchasable: true,
+        description: 'Cyberpunk-inspired neon artwork',
+        imageUrl: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170'
       }
     ];
 

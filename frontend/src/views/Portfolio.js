@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import NFTCard from '../components/NFTCard';
-import { NFTGridSkeleton, StatsCardSkeleton } from '../components/SkeletonLoader';
+import { NFTGridSkeleton } from '../components/SkeletonLoader';
 import { EmptyPortfolio, EmptyCreatedNFTs } from '../components/EmptyState';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
@@ -110,13 +110,7 @@ function Portfolio({ account, connected }) {
       </div>
 
       {/* stats card */}
-      {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-          {[...Array(5)].map((_, index) => (
-            <StatsCardSkeleton key={index} />
-          ))}
-        </div>
-      ) : (
+      {!loading && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
             <p className="text-gray-400 text-sm mb-1">Total NFTs</p>
