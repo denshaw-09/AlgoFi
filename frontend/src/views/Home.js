@@ -84,29 +84,29 @@ function Home({ account, connected }) {
       {/* hero section */}
       <section className="text-center py-10">
         <div className="max-w-5xl mx-auto">
-          <h1 data-aos="zoom-in" className="text-6xl md:text-7xl font-bold text-[#f3e9d2] mb-8 leading-none drop-shadow-lg">
+          <h1 className="text-6xl md:text-7xl font-bold text-[#f3e9d2] mb-8 leading-none drop-shadow-lg">
             Create, Trade & Collect<br />
             <span className="text-[#fca311] py-2">NFTs on Algorand</span>
           </h1>
-          <p data-aos="fade-up" className="text-2xl text-gray-400 mb-10 leading-relaxed max-w-4xl mx-auto font-['Patrick_Hand']">
+          <p className="text-2xl text-gray-400 mb-10 leading-relaxed max-w-4xl mx-auto font-['Patrick_Hand']">
             AlgoFi is the decentralized NFT marketplace where artists, musicians, and creators
             can mint, showcase, and trade their digital assets with zero hassle.
           </p>
-          <div data-aos="fade-up" className="flex flex-wrap justify-center gap-6">
-            <Link data-aos="zoom-in" to="/marketplace">
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link to="/marketplace">
               <button className="btn-sketch-primary text-xl px-10 py-4">
                 Explore Marketplace
               </button>
             </Link>
 
             {connected ? (
-              <a data-aos="zoom-in" href="#mint">
+              <a href="#mint">
                 <button className="btn-sketch-secondary text-xl px-10 py-4">
                   Start Minting
                 </button>
               </a>
             ) : (
-              <button data-aos="zoom-in" className="btn-sketch-secondary text-xl px-10 py-4">
+              <button className="btn-sketch-secondary text-xl px-10 py-4">
                 Connect Wallet to Mint
               </button>
             )}
@@ -119,7 +119,7 @@ function Home({ account, connected }) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 
           {/* fast */}
-          <div data-aos="fade-up" className="card-sketch p-6 flex items-center gap-6">
+          <div className="card-sketch p-6 flex items-center gap-6">
             <div className="flex-shrink-0">
               <IconFast />
             </div>
@@ -130,7 +130,7 @@ function Home({ account, connected }) {
           </div>
 
           {/* low cost */}
-          <div data-aos="fade-down" className="card-sketch p-6 flex items-center gap-6">
+          <div className="card-sketch p-6 flex items-center gap-6">
             <div className="flex-shrink-0">
               <IconCost />
             </div>
@@ -141,7 +141,7 @@ function Home({ account, connected }) {
           </div>
 
           {/* eco-friendly */}
-          <div data-aos="fade-up" className="card-sketch p-6 flex items-center gap-6">
+          <div className="card-sketch p-6 flex items-center gap-6">
             <div className="flex-shrink-0">
               <IconEco />
             </div>
@@ -218,7 +218,7 @@ function Home({ account, connected }) {
 
       {/* Mint Section */}
       {connected ? (
-        <section data-aos="fade-out" id="mint" className="max-w-3xl mx-auto">
+        <section id="mint" className="max-w-3xl mx-auto">
           <div className="card-sketch-dark p-8">
             <h2 className="text-4xl text-center mb-8 text-[#fca311]">Mint Your NFT</h2>
             <MintForm account={account} />
@@ -226,7 +226,7 @@ function Home({ account, connected }) {
         </section>
       ) : (
         <section className="max-w-2xl mx-auto text-center py-12">
-          <div data-aos="flip-left" className="card-sketch-dark p-12">
+          <div className="card-sketch-dark p-12">
             <div className="text-6xl mb-6">🔒</div>
             <h2 className="text-3xl font-bold text-[#f3e9d2] mb-4">Ready to Get Started?</h2>
             <p className="text-gray-300 mb-8 text-lg">
@@ -240,7 +240,7 @@ function Home({ account, connected }) {
       )}
 
       {/* CTA Section */}
-      <section data-aos="flip-right" className="max-w-4xl mx-auto text-center py-12">
+      <section className="max-w-4xl mx-auto text-center py-12">
         <div className="bg-[#292524] rounded-2xl p-12 border-2 border-[#fca311] shadow-[8px_8px_0px_0px_#000]">
           <h2 className="text-4xl font-bold text-[#f3e9d2] mb-4">
             Join the AlgoRand Community

@@ -188,7 +188,7 @@ function App() {
           <ScrollToTop />
           
           <footer className="mt-20 border-t-2 border-[#3e3834] bg-[#1c1917]/90 backdrop-blur-sm">
-            <div data-aos="fade-up" className="container mx-auto px-4 py-12">
+            <div className="container mx-auto px-4 py-12">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                   <h3 className="text-2xl text-[#f3e9d2] mb-4">AlgoFi</h3>

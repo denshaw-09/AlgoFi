@@ -81,7 +81,7 @@ function Portfolio({ account, connected }) {
 
   if (!connected || !account) {
     return (
-      <div data-aos="zoom-in" className="max-w-2xl mx-auto text-center py-20">
+      <div className="max-w-2xl mx-auto text-center py-20">
         <div className="card-sketch-dark p-12">
           <div className="text-6xl mb-6">👛</div>
           <h2 className="text-3xl font-bold text-[#f3e9d2] mb-4">
@@ -98,7 +98,7 @@ function Portfolio({ account, connected }) {
   return (
     <div className="space-y-8">
       {/* header */}
-      <div data-aos="fade-in" className="text-center">
+      <div className="text-center">
         <h1 className="text-5xl font-bold text-[#f3e9d2] mb-4">
           My Portfolio
         </h1>
@@ -109,23 +109,23 @@ function Portfolio({ account, connected }) {
 
       {/* stats card */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div data-aos="fade-up" className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
           <p className="text-gray-400 text-sm mb-1">Total NFTs</p>
           <p className="text-3xl font-bold text-white">{stats.totalNfts}</p>
         </div>
-        <div data-aos="fade-up" className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
           <p className="text-gray-400 text-sm mb-1">🎨 Art</p>
           <p className="text-3xl font-bold text-[#fca311]">{stats.artNfts}</p>
         </div>
-        <div data-aos="fade-up" className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
           <p className="text-gray-400 text-sm mb-1">🎵 Music</p>
           <p className="text-3xl font-bold text-pink-400">{stats.musicNfts}</p>
         </div>
-        <div data-aos="fade-up" className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
           <p className="text-gray-400 text-sm mb-1">💎 Standard</p>
           <p className="text-3xl font-bold text-blue-400">{stats.standardNfts}</p>
         </div>
-        <div data-aos="fade-up" className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
+        <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 transition-transform">
           <p className="text-gray-400 text-sm mb-1">Total Value</p>
           <p className="text-2xl font-bold text-green-400">{formatPrice(stats.totalValue)} ALGO</p>
         </div>
@@ -134,7 +134,7 @@ function Portfolio({ account, connected }) {
       {/* a/c info */}
       <div className="card-sketch-dark p-6">
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <div data-aos="fade-in" className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4">
             <div className="w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-3xl border-2 border-[#f3e9d2]">
               👤
             </div>
@@ -143,7 +143,7 @@ function Portfolio({ account, connected }) {
               <p className="text-lg font-mono text-[#f3e9d2]">{account}</p>
             </div>
           </div>
-          <div data-aos="fade-up" className="flex space-x-3">
+          <div className="flex space-x-3">
             <a
               href={`https://testnet.algoexplorer.io/address/${account}`}
               target="_blank"
@@ -157,7 +157,7 @@ function Portfolio({ account, connected }) {
       </div>
 
       {/* tabs */}
-      <div data-aos="zoom-in" className="flex space-x-4 border-b-2 border-[#3e3834]">
+      <div className="flex space-x-4 border-b-2 border-[#3e3834]">
         <button
           onClick={() => setActiveTab('owned')}
           className={`px-6 py-3 font-bold text-lg transition border-t-2 border-x-2 rounded-t-lg ${activeTab === 'owned'
@@ -180,7 +180,7 @@ function Portfolio({ account, connected }) {
 
       {/* NFT Grid */}
       {loading ? (
-        <div data-aos="fade-in" className="text-center py-20">
+        <div className="text-center py-20">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#fca311]"></div>
           <p className="text-gray-400 mt-4 text-xl">Loading portfolio...</p>
         </div>
@@ -191,7 +191,7 @@ function Portfolio({ account, connected }) {
               {ownedNfts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {ownedNfts.map(nft => (
-                    <div data-aos="fade-up">
+                    <div>
                       <NFTCard
                         key={nft.id}
                         nft={nft}
@@ -203,12 +203,12 @@ function Portfolio({ account, connected }) {
                 </div>
               ) : (
                 <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-                  <div data-aos="fade-in" className="text-6xl mb-4">📦</div>
-                  <h3 data-aos="fade-in" className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Yet</h3>
-                  <p data-aos="fade-out" className="text-gray-400 mb-6">
+                  <div className="text-6xl mb-4">📦</div>
+                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Yet</h3>
+                  <p className="text-gray-400 mb-6">
                     Start your collection by minting or purchasing NFTs
                   </p>
-                  <div data-aos="fade-up" className="flex justify-center gap-4">
+                  <div className="flex justify-center gap-4">
                     <a
                       href="/"
                       className="btn-sketch-primary"
@@ -232,7 +232,7 @@ function Portfolio({ account, connected }) {
               {createdNfts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {createdNfts.map(nft => (
-                    <div data-aos="fade-up" key={nft.id} className="relative">
+                    <div key={nft.id} className="relative">
                       <NFTCard
                         nft={nft}
                         account={account}
@@ -248,13 +248,13 @@ function Portfolio({ account, connected }) {
                 </div>
               ) : (
                 <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-                  <div data-aos="fade-in" className="text-6xl mb-4">🎨</div>
-                  <h3 data-aos="fade-in" className="text-2xl font-bold text-[#f3e9d2] mb-2">No Created NFTs</h3>
-                  <p data-aos="fade-out" className="text-gray-400 mb-6">
+                  <div className="text-6xl mb-4">🎨</div>
+                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No Created NFTs</h3>
+                  <p className="text-gray-400 mb-6">
                     Start creating by minting your first NFT
                   </p>
                   <a
-                    data-aos="fade-up"
+                  
                     href="/"
                     className="inline-block btn-sketch-primary"
                   >
@@ -269,10 +269,10 @@ function Portfolio({ account, connected }) {
 
       {/* Quick Actions */}
       <div className="bg-[#292524] rounded-2xl p-8 border-2 border-[#fca311] shadow-[6px_6px_0px_0px_#000]">
-        <h3 data-aos="fade-in" className="text-2xl font-bold text-[#f3e9d2] mb-4">Quick Actions</h3>
+        <h3 className="text-2xl font-bold text-[#f3e9d2] mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a
-            data-aos="fade-up"
+          
             href="/"
             className="p-6 bg-[#1c1917] hover:bg-[#3e3834] rounded-xl border-2 border-[#3e3834] transition text-center hover:-translate-y-1"
           >
@@ -280,7 +280,7 @@ function Portfolio({ account, connected }) {
             <p className="text-[#f3e9d2] font-medium">Mint New NFT</p>
           </a>
           <a
-            data-aos="fade-up"
+          
             href="/marketplace"
             className="p-6 bg-[#1c1917] hover:bg-[#3e3834] rounded-xl border-2 border-[#3e3834] transition text-center hover:-translate-y-1"
           >
@@ -288,7 +288,7 @@ function Portfolio({ account, connected }) {
             <p className="text-[#f3e9d2] font-medium">Browse Marketplace</p>
           </a>
           <a
-            data-aos="fade-up"
+          
             href={`https://testnet.algoexplorer.io/address/${account}`}
             target="_blank"
             rel="noopener noreferrer"

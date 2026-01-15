@@ -120,7 +120,7 @@ function Marketplace({ account, connected }) {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div data-aos="fade-out" className="text-center">
+      <div className="text-center">
         <h1 className="text-5xl font-bold text-[#f3e9d2] mb-4">
           Explore Marketplace
         </h1>
@@ -130,7 +130,7 @@ function Marketplace({ account, connected }) {
       </div>
 
       {/* Filters */}
-      <div data-aos="fade-up" className="bg-[#292524] rounded-2xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000]">
+      <div className="bg-[#292524] rounded-2xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div className="md:col-span-1">
@@ -159,7 +159,7 @@ function Marketplace({ account, connected }) {
           </div>
 
           {/* Sort */}
-          <div data-aos="fade-down" className="md:col-span-1">
+          <div className="md:col-span-1">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
@@ -174,7 +174,7 @@ function Marketplace({ account, connected }) {
       </div>
 
       {/* Filter Pills */}
-      <div data-aos="fade-up" className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3">
         {filterOptions.map(option => (
           <button
             key={option.value}
@@ -190,20 +190,20 @@ function Marketplace({ account, connected }) {
       </div>
 
       {/* Results Count */}
-      <div data-aos="fade-in" className="text-gray-400 text-lg">
+      <div className="text-gray-400 text-lg">
         Showing <span className="font-bold text-[#fca311]">{filteredNfts.length}</span> {filteredNfts.length === 1 ? 'NFT' : 'NFTs'}
       </div>
 
       {/* NFT Grid */}
       {loading ? (
-        <div data-aos="fade-in" className="text-center py-20">
+        <div className="text-center py-20">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#fca311]"></div>
           <p className="text-gray-400 mt-4 text-xl">Loading marketplace...</p>
         </div>
       ) : filteredNfts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredNfts.map(nft => (
-            <div data-aos="fade-up">
+            <div>
               <NFTCard
                 key={nft.id}
                 nft={nft}
@@ -214,7 +214,7 @@ function Marketplace({ account, connected }) {
           ))}
         </div>
       ) : (
-        <div data-aos="fade-in" className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
+        <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Found</h3>
           <p className="text-gray-400">
@@ -225,7 +225,7 @@ function Marketplace({ account, connected }) {
 
       {/* Info Banner */}
       {!connected && (
-        <div data-aos="fade-out" className="bg-[#292524] rounded-2xl p-8 border-2 border-[#fca311] text-center shadow-[6px_6px_0px_0px_#000]">
+        <div className="bg-[#292524] rounded-2xl p-8 border-2 border-[#fca311] text-center shadow-[6px_6px_0px_0px_#000]">
           <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">
             Connect Your Wallet
           </h3>

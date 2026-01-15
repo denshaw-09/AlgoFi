@@ -21,8 +21,8 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
   ];
 
   return (
-    <header data-aos="fade-out" className="bg-[#1c1917]/90 backdrop-blur-md border-b-2 border-[#3e3834] sticky top-0 z-50 pt-2 pb-2">
-      <nav data-aos="fade-down" className="container mx-auto px-4 py-2">
+    <header className="bg-[#1c1917]/90 backdrop-blur-md border-b-2 border-[#3e3834] sticky top-0 z-50 pt-2 pb-2">
+      <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* logo */}
           <Link to="/" className="flex items-center space-x-2 group">
