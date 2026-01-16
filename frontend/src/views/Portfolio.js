@@ -22,7 +22,8 @@ function Portfolio({ account, connected }) {
     setLoading(true);
     try {
       // In production, fetch from backend/indexer
-      await axios.get(`${API_URL}/nfts/account/${account}`);
+      // Simulate API call with minimal delay
+      await new Promise(resolve => setTimeout(resolve, 200));
 
       // Mock data - demo
       const mockNfts = [
@@ -184,7 +185,7 @@ function Portfolio({ account, connected }) {
 
       {/* NFT Grid */}
       {loading ? (
-        <NFTGridSkeleton count={3} />
+        <NFTGridSkeleton count={2} />
       ) : (
         <>
           {activeTab === 'owned' && (

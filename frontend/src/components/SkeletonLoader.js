@@ -1,7 +1,7 @@
 import React from 'react';
 
-// Skeleton loader for NFT cards
-export const NFTCardSkeleton = () => {
+// Optimized skeleton loader for NFT cards with reduced animation overhead
+export const NFTCardSkeleton = React.memo(() => {
   return (
     <div className="card-sketch overflow-hidden animate-pulse">
       {/* Image skeleton */}
@@ -35,10 +35,12 @@ export const NFTCardSkeleton = () => {
       </div>
     </div>
   );
-};
+});
 
-// Grid of skeleton loaders
-export const NFTGridSkeleton = ({ count = 6 }) => {
+NFTCardSkeleton.displayName = 'NFTCardSkeleton';
+
+// Optimized grid of skeleton loaders with React.memo for performance
+export const NFTGridSkeleton = React.memo(({ count = 6 }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {[...Array(count)].map((_, index) => (
@@ -46,16 +48,20 @@ export const NFTGridSkeleton = ({ count = 6 }) => {
       ))}
     </div>
   );
-};
+});
 
-// Stats card skeleton
-export const StatsCardSkeleton = () => {
+NFTGridSkeleton.displayName = 'NFTGridSkeleton';
+
+// Stats card skeleton with optimized rendering
+export const StatsCardSkeleton = React.memo(() => {
   return (
     <div className="bg-[#292524] rounded-xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000] animate-pulse">
       <div className="h-4 bg-[#3e3834] rounded w-20 mb-2"></div>
       <div className="h-8 bg-[#3e3834] rounded w-16"></div>
     </div>
   );
-};
+});
+
+StatsCardSkeleton.displayName = 'StatsCardSkeleton';
 
 export default NFTCardSkeleton;

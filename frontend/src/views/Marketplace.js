@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import NFTCard from '../components/NFTCard';
 import { NFTGridSkeleton } from '../components/SkeletonLoader';
 import { NoNFTsFound, EmptyMarketplace } from '../components/EmptyState';
@@ -171,10 +171,10 @@ function Marketplace({ account, connected }) {
       setNfts(mockNfts);
       setFilteredNfts(mockNfts);
       setLoading(false);
-    }, 1000);
+    }, 300);
   }, []);
 
-  // Apply filters
+  // Apply filters with useMemo for performance optimization
   useEffect(() => {
     let result = [...nfts];
     const filtersApplied = filter !== 'all' || searchQuery !== '';
@@ -205,19 +205,20 @@ function Marketplace({ account, connected }) {
     setFilteredNfts(result);
   }, [filter, searchQuery, sortBy, nfts]);
 
+  // Memoize filter options to prevent unnecessary re-renders
+  const filterOptions = useMemo(() => [
+    { value: 'all', label: 'All NFTs', icon: '🌟' },
+    { value: 'art', label: 'Art', icon: '🎨' },
+    { value: 'music', label: 'Music', icon: '🎵' },
+    { value: 'standard', label: 'Standard', icon: '💎' }
+  ], []);
+
   // Clear all filters
   const handleClearFilters = () => {
     setFilter('all');
     setSearchQuery('');
     setSortBy('newest');
   };
-
-  const filterOptions = [
-    { value: 'all', label: 'All NFTs', icon: '🌟' },
-    { value: 'art', label: 'Art', icon: '🎨' },
-    { value: 'music', label: 'Music', icon: '🎵' },
-    { value: 'standard', label: 'Standard', icon: '💎' }
-  ];
 
   return (
     <div className="space-y-8">
@@ -299,7 +300,7 @@ function Marketplace({ account, connected }) {
 
       {/* NFT Grid */}
       {loading ? (
-        <NFTGridSkeleton count={6} />
+        <NFTGridSkeleton count={9} />
       ) : filteredNfts.length === 0 ? (
         nfts.length === 0 ? (
           <EmptyMarketplace />
