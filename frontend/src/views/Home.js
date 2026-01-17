@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import MintForm from '../components/MintForm';
 
 const IconFast = () => (
-  <svg className="w-16 h-16 text-[#292524]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-16 h-16 text-sketch-dark-text" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="50" cy="55" r="35" />
     <circle cx="50" cy="55" r="30" strokeWidth="1" />
     <path d="M45,15 L55,15 L55,20 L45,20 Z" fill="currentColor" />
@@ -21,7 +21,7 @@ const IconFast = () => (
 );
 
 const IconCost = () => (
-  <svg className="w-16 h-16 text-[#292524]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-16 h-16 text-sketch-dark-text" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
     <ellipse cx="30" cy="40" rx="15" ry="6" />
     <path d="M15,40 L15,50 C15,55 45,55 45,50 L45,40" />
     <path d="M15,50 L15,60 C15,65 45,65 45,60 L45,50" />
@@ -35,7 +35,7 @@ const IconCost = () => (
 );
 
 const IconEco = () => (
-  <svg className="w-16 h-16 text-[#292524]" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="w-16 h-16 text-sketch-dark-text" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
     <path d="M50,15 L55,15 L58,25 L68,28 L75,20 L82,25 L78,35 L85,42 L95,40 L98,50 L88,55 L85,65 L95,70 L90,80 L78,75 L68,82 L65,92 L55,90 L50,80 L40,80 L35,90 L25,92 L22,82 L12,75 L0,80 L-5,70 L5,65 L2,55 L-8,50 L-5,40 L5,42 L12,35 L8,25 L15,20 L22,28 L32,25 L35,15 Z" transform="translate(5,5) scale(0.9)" />
     <circle cx="50" cy="50" r="25" />
     <path d="M50,65 Q35,65 35,50 Q35,35 50,25 Q65,35 65,50 Q65,65 50,65 Z" />
@@ -84,11 +84,11 @@ function Home({ account, connected }) {
       {/* hero section */}
       <section className="text-center py-10">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-6xl md:text-7xl font-bold text-[#f3e9d2] mb-8 leading-none drop-shadow-lg">
+          <h1 className="text-6xl md:text-7xl font-bold text-sketch-text mb-8 leading-none drop-shadow-lg">
             Create, Trade & Collect<br />
-            <span className="text-[#fca311] py-2">NFTs on Algorand</span>
+            <span className="text-sketch-mustard py-2">NFTs on Algorand</span>
           </h1>
-          <p className="text-2xl text-gray-400 mb-10 leading-relaxed max-w-4xl mx-auto font-['Patrick_Hand']">
+          <p className="text-2xl text-sketch-text-secondary mb-10 leading-relaxed max-w-4xl mx-auto font-['Patrick_Hand']">
             AlgoFi is the decentralized NFT marketplace where artists, musicians, and creators
             can mint, showcase, and trade their digital assets with zero hassle.
           </p>
@@ -124,8 +124,8 @@ function Home({ account, connected }) {
               <IconFast />
             </div>
             <div className="text-left">
-              <h3 className="text-3xl font-bold text-[#292524] mb-1">Fast</h3>
-              <p className="text-[#292524] font-bold text-lg font-['Patrick_Hand']">4.5 Second Finality</p>
+              <h3 className="text-3xl font-bold text-sketch-dark-text mb-1">Fast</h3>
+              <p className="text-sketch-dark-text font-bold text-lg font-['Patrick_Hand']">4.5 Second Finality</p>
             </div>
           </div>
 
@@ -135,8 +135,8 @@ function Home({ account, connected }) {
               <IconCost />
             </div>
             <div className="text-left">
-              <h3 className="text-3xl font-bold text-[#292524] mb-1">Low Cost</h3>
-              <p className="text-[#292524] font-bold text-lg font-['Patrick_Hand']">~0.001 ALGO Fees</p>
+              <h3 className="text-3xl font-bold text-sketch-dark-text mb-1">Low Cost</h3>
+              <p className="text-sketch-dark-text font-bold text-lg font-['Patrick_Hand']">~0.001 ALGO Fees</p>
             </div>
           </div>
 
@@ -146,8 +146,8 @@ function Home({ account, connected }) {
               <IconEco />
             </div>
             <div className="text-left">
-              <h3 className="text-3xl font-bold text-[#292524] mb-1">Eco-Friendly</h3>
-              <p className="text-[#292524] font-bold text-lg font-['Patrick_Hand']">Carbon Negative</p>
+              <h3 className="text-3xl font-bold text-sketch-dark-text mb-1">Eco-Friendly</h3>
+              <p className="text-sketch-dark-text font-bold text-lg font-['Patrick_Hand']">Carbon Negative</p>
             </div>
           </div>
 
@@ -156,7 +156,7 @@ function Home({ account, connected }) {
 
       {/* features */}
       <section className="max-w-6xl mx-auto">
-        <h2 data-aos="fade-in" className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
+        <h2 data-aos="fade-in" className="text-5xl font-bold text-sketch-text text-center mb-12">
           Why Choose AlgoFi?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -164,8 +164,8 @@ function Home({ account, connected }) {
             <div key={index} data-aos="fade-up">
               <div className="card-sketch-dark p-8 hover:scale-105 transition-transform duration-300">
                 <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-[#fca311] mb-3">{feature.title}</h3>
-                <p className="text-gray-300 text-lg">{feature.description}</p>
+                <h3 className="text-2xl font-bold text-sketch-mustard mb-3">{feature.title}</h3>
+                <p className="text-sketch-text-secondary text-lg">{feature.description}</p>
               </div>
             </div>
           ))}
@@ -174,41 +174,41 @@ function Home({ account, connected }) {
 
       {/* how it work section */}
       <section className="max-w-4xl mx-auto">
-        <h2 data-aos="fade-in" className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
+        <h2 data-aos="fade-in" className="text-5xl font-bold text-sketch-text text-center mb-12">
           How It Works
         </h2>
         <div className="space-y-8">
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
-            <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
+            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
               1
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">Connect Your Wallet</h3>
-              <p className="text-gray-400 text-lg">
+              <h3 className="text-2xl font-bold text-sketch-text mb-2">Connect Your Wallet</h3>
+              <p className="text-sketch-text-secondary text-lg">
                 Connect your Pera Wallet or any Algorand-compatible wallet to get started
               </p>
             </div>
           </div>
 
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
-            <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
+            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
               2
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">Create Your NFT</h3>
-              <p className="text-gray-400 text-lg">
+              <h3 className="text-2xl font-bold text-sketch-text mb-2">Create Your NFT</h3>
+              <p className="text-sketch-text-secondary text-lg">
                 Upload your artwork, music, or any digital asset and set your preferences
               </p>
             </div>
           </div>
 
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
-            <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
+            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
               3
             </div>
             <div className="flex-1">
-              <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">List or Share</h3>
-              <p className="text-gray-400 text-lg">
+              <h3 className="text-2xl font-bold text-sketch-text mb-2">List or Share</h3>
+              <p className="text-sketch-text-secondary text-lg">
                 List your NFT for sale on the marketplace or share it as a free collectible
               </p>
             </div>
@@ -220,7 +220,7 @@ function Home({ account, connected }) {
       {connected ? (
         <section id="mint" className="max-w-3xl mx-auto">
           <div className="card-sketch-dark p-8">
-            <h2 className="text-4xl text-center mb-8 text-[#fca311]">Mint Your NFT</h2>
+            <h2 className="text-4xl text-center mb-8 text-sketch-mustard">Mint Your NFT</h2>
             <MintForm account={account} />
           </div>
         </section>
@@ -228,8 +228,8 @@ function Home({ account, connected }) {
         <section className="max-w-2xl mx-auto text-center py-12">
           <div className="card-sketch-dark p-12">
             <div className="text-6xl mb-6">🔒</div>
-            <h2 className="text-3xl font-bold text-[#f3e9d2] mb-4">Ready to Get Started?</h2>
-            <p className="text-gray-300 mb-8 text-lg">
+            <h2 className="text-3xl font-bold text-sketch-text mb-4">Ready to Get Started?</h2>
+            <p className="text-sketch-text-secondary mb-8 text-lg">
               Connect your wallet to start minting and trading NFTs on AlgoFi
             </p>
             <button className="btn-sketch-secondary opacity-50 cursor-not-allowed">
@@ -241,11 +241,11 @@ function Home({ account, connected }) {
 
       {/* CTA Section */}
       <section className="max-w-4xl mx-auto text-center py-12">
-        <div className="bg-[#292524] rounded-2xl p-12 border-2 border-[#fca311] shadow-[8px_8px_0px_0px_#000]">
-          <h2 className="text-4xl font-bold text-[#f3e9d2] mb-4">
+        <div className="bg-sketch-bg-secondary rounded-2xl p-12 border-2 border-sketch-mustard shadow-[8px_8px_0px_0px_var(--color-shadow)]">
+          <h2 className="text-4xl font-bold text-sketch-text mb-4">
             Join the AlgoRand Community
           </h2>
-          <p className="text-gray-300 mb-8 text-xl">
+          <p className="text-sketch-text-secondary mb-8 text-xl">
             Be part of the next generation of digital creators and collectors
           </p>
           <div className="flex flex-wrap justify-center gap-4">

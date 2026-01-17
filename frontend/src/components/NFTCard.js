@@ -45,7 +45,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
     <>
       <div className="card-sketch overflow-hidden group relative flex flex-col h-full">
         {/* img container */}
-        <div className="relative aspect-square overflow-hidden bg-[#292524] border-b-4 border-[#3e3834]">
+        <div className="relative aspect-square overflow-hidden bg-sketch-bg-secondary border-b-4 border-sketch-border">
           {nft.imageUrl ? (
             <img
               src={nft.imageUrl}
@@ -60,7 +60,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
           {/* type tag */}
           <div className="absolute top-3 right-3">
-            <span className="px-3 py-1 bg-[#292524] rounded-lg text-xs font-bold text-[#fca311] border-2 border-[#f3e9d2] shadow-[2px_2px_0px_0px_#000]">
+            <span className="px-3 py-1 bg-sketch-bg-secondary rounded-lg text-xs font-bold text-sketch-mustard border-2 border-sketch-border shadow-[2px_2px_0px_0px_var(--color-shadow)]">
               {typeEmojis[nft.type]} {nft.type.toUpperCase()}
             </span>
           </div>
@@ -68,7 +68,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
           {/* purchasable tag */}
           {!nft.purchasable && (
             <div className="absolute top-3 left-3">
-              <span className="px-3 py-1 bg-[#f3e9d2] rounded-lg text-xs font-bold text-[#292524] border-2 border-[#292524] shadow-[2px_2px_0px_0px_#000]">
+              <span className="px-3 py-1 bg-sketch-card-bg rounded-lg text-xs font-bold text-sketch-dark-text border-2 border-sketch-dark-text shadow-[2px_2px_0px_0px_var(--color-shadow)]">
                 FREE
               </span>
             </div>
@@ -77,38 +77,38 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
 
         {/* details */}
         <div className="p-5 flex flex-col flex-grow">
-          <h3 className="text-2xl font-bold text-[#292524] mb-2 truncate font-['Fredoka_One']">
+          <h3 className="text-2xl font-bold text-sketch-dark-text mb-2 truncate font-['Fredoka_One']">
             {nft.name}
           </h3>
 
           {nft.description && (
-            <p className="text-gray-600 text-sm mb-4 line-clamp-2 font-bold">
+            <p className="text-sketch-text-muted text-sm mb-4 line-clamp-2 font-bold">
               {nft.description}
             </p>
           )}
 
           <div className="mt-auto">
             {/* creator */}
-            <div className="flex items-center space-x-2 mb-4 bg-[#e5dac1] p-2 rounded-lg border border-[#3e3834]">
-              <div className="w-8 h-8 bg-[#fca311] rounded-full flex items-center justify-center border border-black">
+            <div className="flex items-center space-x-2 mb-4 bg-sketch-creator-bg p-2 rounded-lg border border-sketch-border">
+              <div className="w-8 h-8 bg-sketch-mustard rounded-full flex items-center justify-center border border-sketch-dark-text">
                 <span className="text-xs">👤</span>
               </div>
               <div>
-                <p className="text-xs text-gray-600 font-bold">Creator</p>
-                <p className="text-sm text-[#292524] font-mono font-bold">
+                <p className="text-xs text-sketch-text-muted font-bold">Creator</p>
+                <p className="text-sm text-sketch-dark-text font-mono font-bold">
                   {nft.creator?.slice(0, 6)}...{nft.creator?.slice(-4)}
                 </p>
               </div>
             </div>
 
             {/* Price or Free */}
-            <div className="border-t-2 border-[#3e3834] pt-4">
+            <div className="border-t-2 border-sketch-border pt-4">
               {nft.purchasable && nft.price > 0 ? (
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-gray-600 font-bold">Price</p>
-                    <p className="text-2xl font-bold text-[#292524]">
-                      {formatPrice(nft.price)} <span className="text-lg text-[#fca311]">ALGO</span>
+                    <p className="text-xs text-sketch-text-muted font-bold">Price</p>
+                    <p className="text-2xl font-bold text-sketch-dark-text">
+                      {formatPrice(nft.price)} <span className="text-lg text-sketch-mustard">ALGO</span>
                     </p>
                   </div>
 
@@ -124,7 +124,7 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
                 </div>
               ) : (
                 <div className="text-center">
-                  <p className="text-gray-500 text-sm font-bold italic">
+                  <p className="text-sketch-text-muted text-sm font-bold italic">
                     {nft.purchasable ? 'Not listed for sale' : 'Non-purchasable collectible'}
                   </p>
                 </div>
@@ -138,28 +138,28 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
       {showBuyModal && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="card-sketch-dark p-8 max-w-md w-full">
-            <h3 className="text-3xl font-bold text-[#fca311] mb-6 text-center">Confirm Purchase</h3>
+            <h3 className="text-3xl font-bold text-sketch-mustard mb-6 text-center">Confirm Purchase</h3>
 
-            <div className="space-y-4 mb-8 bg-[#1c1917] p-6 rounded-xl border-2 border-[#3e3834]">
+            <div className="space-y-4 mb-8 bg-sketch-bg p-6 rounded-xl border-2 border-sketch-border">
               <div className="flex justify-between items-center">
-                <span className="text-gray-400 text-lg">NFT:</span>
-                <span className="text-[#f3e9d2] font-bold text-xl">{nft.name}</span>
+                <span className="text-sketch-text-secondary text-lg">NFT:</span>
+                <span className="text-sketch-text font-bold text-xl">{nft.name}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400 text-lg">Price:</span>
-                <span className="text-[#fca311] font-bold text-xl">
+                <span className="text-sketch-text-secondary text-lg">Price:</span>
+                <span className="text-sketch-mustard font-bold text-xl">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-400 text-lg">Fee (2.5%):</span>
-                <span className="text-gray-500 font-bold">
+                <span className="text-sketch-text-secondary text-lg">Fee (2.5%):</span>
+                <span className="text-sketch-text-muted font-bold">
                   {formatPrice(nft.price * 0.025)} ALGO
                 </span>
               </div>
-              <div className="border-t-2 border-[#3e3834] pt-4 flex justify-between items-center mt-4">
-                <span className="text-[#f3e9d2] font-bold text-xl">Total:</span>
-                <span className="text-[#f3e9d2] font-bold text-2xl">
+              <div className="border-t-2 border-sketch-border pt-4 flex justify-between items-center mt-4">
+                <span className="text-sketch-text font-bold text-xl">Total:</span>
+                <span className="text-sketch-text font-bold text-2xl">
                   {formatPrice(nft.price)} ALGO
                 </span>
               </div>

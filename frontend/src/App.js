@@ -6,6 +6,7 @@ import Home from './views/Home';
 import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
 import ScrollToTop from './components/ScrollToTop';
+import { ThemeProvider } from './context/ThemeContext';
 
 // AOS for animations
 import AOS from 'aos';
@@ -14,7 +15,7 @@ import 'aos/dist/aos.css';
 const Chains = () => (
   <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     {/* top left chain */}
-    <svg className="absolute -top-10 -left-5 w-40 h-80 text-[#000000] opacity-20" viewBox="0 0 100 300" fill="currentColor">
+    <svg className="absolute -top-10 -left-5 w-40 h-80 text-sketch-svg-fill opacity-20" viewBox="0 0 100 300" fill="currentColor">
        {/* chain links */}
        <path d="M40,0 L60,0 L60,30 L40,30 Z" />
        <path d="M30,25 C10,25 10,55 30,55 L70,55 C90,55 90,25 70,25 Z M30,35 L70,35 C75,35 75,45 70,45 L30,45 C25,45 25,35 30,35 Z" />
@@ -23,11 +24,11 @@ const Chains = () => (
        <path d="M40,100 L60,100 L60,130 L40,130 Z" />
        {/* gear bottom*/}
        <circle cx="50" cy="180" r="40" />
-       <circle cx="50" cy="180" r="15" fill="#1c1917" />
+       <circle cx="50" cy="180" r="15" className="fill-sketch-bg" />
     </svg>
     
     {/*right side chain*/}
-    <svg className="absolute -top-20 right-10 w-32 h-96 text-[#000000] opacity-20" viewBox="0 0 100 400" fill="currentColor">
+    <svg className="absolute -top-20 right-10 w-32 h-96 text-sketch-svg-fill opacity-20" viewBox="0 0 100 400" fill="currentColor">
        <path d="M45,0 L55,0 L55,400 L45,400 Z" />
        <circle cx="50" cy="380" r="30" />
     </svg>
@@ -37,13 +38,13 @@ const Chains = () => (
 const Gears = () => (
   <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
     {/* gear bottom left*/}
-    <svg className="absolute -bottom-32 -left-32 w-[600px] h-[600px] text-[#000000] opacity-10 animate-[spin_60s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
+    <svg className="absolute -bottom-32 -left-32 w-[600px] h-[600px] text-sketch-svg-fill opacity-10 animate-[spin_60s_linear_infinite]" viewBox="0 0 100 100" fill="currentColor">
       {/* gear - solid*/}
       <path d="M50 20 L55 5 L65 5 L70 20 L82 25 L95 18 L100 28 L90 38 L95 50 L110 55 L110 65 L95 70 L90 82 L100 92 L92 100 L82 90 L70 95 L65 110 L55 110 L50 95 L38 90 L28 100 L18 92 L25 82 L20 70 L5 65 L5 55 L20 50 L25 38 L18 28 L28 18 L38 25 Z M50 40 A10 10 0 1 0 50 60 A10 10 0 1 0 50 40 Z" />
     </svg>
     
     {/*gear - top right*/}
-    <svg className="absolute top-40 -right-20 w-80 h-80 text-[#000000] opacity-10 animate-[spin_40s_linear_infinite_reverse]" viewBox="0 0 100 100" fill="currentColor">
+    <svg className="absolute top-40 -right-20 w-80 h-80 text-sketch-svg-fill opacity-10 animate-[spin_40s_linear_infinite_reverse]" viewBox="0 0 100 100" fill="currentColor">
       <path d="M50 15 L56 5 L68 5 L74 15 L85 20 L95 12 L100 22 L90 32 L95 45 L110 50 L110 62 L95 67 L90 80 L100 90 L90 100 L80 90 L67 95 L62 110 L50 110 L45 95 L32 90 L22 100 L12 90 L20 80 L15 67 L0 62 L0 50 L15 45 L20 32 L12 22 L22 12 L32 20 Z M50 45 A5 5 0 1 0 50 55 A5 5 0 1 0 50 45 Z" />
     </svg>
   </div>
@@ -52,17 +53,17 @@ const Gears = () => (
 const Clouds = () => (
   <div className="fixed inset-0 pointer-events-none z-0">
     {/* cl1*/}
-    <svg className="absolute top-32 left-[15%] w-48 h-32 text-[#000000] opacity-20" viewBox="0 0 100 60" fill="currentColor">
+    <svg className="absolute top-32 left-[15%] w-48 h-32 text-sketch-svg-fill opacity-20" viewBox="0 0 100 60" fill="currentColor">
       <path d="M20,50 Q5,50 5,35 Q5,20 20,20 Q25,5 45,10 Q60,0 75,15 Q90,15 90,35 Q90,50 75,50 Z" />
     </svg>
     
     {/*cl2*/}
-    <svg className="absolute top-20 right-[20%] w-40 h-28 text-[#000000] opacity-20" viewBox="0 0 100 60" fill="currentColor">
+    <svg className="absolute top-20 right-[20%] w-40 h-28 text-sketch-svg-fill opacity-20" viewBox="0 0 100 60" fill="currentColor">
       <path d="M25,50 Q10,50 10,35 Q10,20 25,20 Q30,5 50,10 Q65,0 80,15 Q95,15 95,35 Q95,50 80,50 Z" />
     </svg>
 
     {/*cl3 - small blob */}
-    <svg className="absolute bottom-40 left-[10%] w-32 h-20 text-[#000000] opacity-15" viewBox="0 0 100 60" fill="currentColor">
+    <svg className="absolute bottom-40 left-[10%] w-32 h-20 text-sketch-svg-fill opacity-15" viewBox="0 0 100 60" fill="currentColor">
       <path d="M20,50 Q10,50 10,40 Q10,30 20,30 Q25,20 40,25 Q50,15 60,25 Q70,25 70,40 Q70,50 60,50 Z" />
     </svg>
   </div>
@@ -153,8 +154,9 @@ function App() {
   }, []);
 
   return (
+    <ThemeProvider>
     <Router>
-      <div className="min-h-screen bg-[#1c1917] relative selection:bg-[#fca311] selection:text-black">
+      <div className="min-h-screen bg-sketch-bg relative selection:bg-sketch-mustard selection:text-black transition-colors duration-300">
         {/* Background Elements */}
         <Chains />
         <Gears />
@@ -283,6 +285,7 @@ function App() {
         </div>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 
