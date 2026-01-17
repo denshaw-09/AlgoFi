@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
 
 function Header({ account, connected, connectWallet, disconnectWallet, loading }) {
   const location = useLocation();
@@ -21,12 +22,12 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
   ];
 
   return (
-    <header className="bg-[#1c1917]/90 backdrop-blur-md border-b-2 border-[#3e3834] sticky top-0 z-50 pt-2 pb-2">
+    <header className="bg-sketch-bg/90 backdrop-blur-md border-b-2 border-sketch-border sticky top-0 z-50 pt-2 pb-2 transition-colors duration-300">
       <nav className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           {/* logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <span className="text-3xl font-bold text-[#f3e9d2] group-hover:text-[#fca311] transition-colors font-['Fredoka_One']">
+            <span className="text-3xl font-bold text-sketch-text group-hover:text-sketch-mustard transition-colors font-['Fredoka_One']">
               AlgoFi
             </span>
           </Link>
@@ -38,23 +39,23 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 key={link.path}
                 to={link.path}
                 className={`text-lg font-medium transition relative group ${isActive(link.path)
-                    ? 'text-[#fca311]'
-                    : 'text-[#f3e9d2] hover:text-[#fca311]'
+                    ? 'text-sketch-mustard'
+                    : 'text-sketch-text hover:text-sketch-mustard'
                   }`}
               >
                 {link.label}
                 {/* Underline sketch effect */}
-                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-[#fca311] transform origin-left transition-transform duration-300 ${isActive(link.path) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+                <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-sketch-mustard transform origin-left transition-transform duration-300 ${isActive(link.path) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
               </Link>
             ))}
           </div>
 
-          {/* wallet connect */}
-          <div className="hidden md:block">
+          {/* wallet connect + theme toggle */}
+          <div className="hidden md:flex items-center space-x-3">
             {connected ? (
               <div className="flex items-center space-x-3">
-                <div className="px-4 py-2 bg-[#292524] rounded-lg border-2 border-[#3e3834]">
-                  <span className="text-[#fca311] font-medium font-mono">
+                <div className="px-4 py-2 bg-sketch-bg-secondary rounded-lg border-2 border-sketch-border">
+                  <span className="text-sketch-mustard font-medium font-mono">
                     {formatAddress(account)}
                   </span>
                 </div>
@@ -74,13 +75,16 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 {loading ? 'Connecting...' : 'Connect Wallet'}
               </button>
             )}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#f3e9d2] hover:text-[#fca311]"
-          >
+          <div className="md:hidden flex items-center space-x-2">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-sketch-text hover:text-sketch-mustard"
+            >
             <svg
               className="w-8 h-8"
               fill="none"
@@ -96,31 +100,32 @@ function Header({ account, connected, connectWallet, disconnectWallet, loading }
                 <path d="M4 6h16M4 12h16M4 18h16" />
               )}
             </svg>
-          </button>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 space-y-4 bg-[#292524] p-4 rounded-xl border-2 border-[#3e3834]">
+          <div className="md:hidden mt-4 space-y-4 bg-sketch-bg-secondary p-4 rounded-xl border-2 border-sketch-border">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`block px-4 py-2 rounded-lg font-medium text-lg ${isActive(link.path)
-                    ? 'bg-[#fca311] text-black'
-                    : 'text-[#f3e9d2] hover:bg-[#3e3834]'
+                    ? 'bg-sketch-mustard text-black'
+                    : 'text-sketch-text hover:bg-sketch-border'
                   }`}
               >
                 {link.label}
               </Link>
             ))}
 
-            <div className="pt-4 border-t border-[#3e3834]">
+            <div className="pt-4 border-t border-sketch-border">
               {connected ? (
                 <>
-                  <div className="px-4 py-2 bg-[#1c1917] rounded-lg border border-[#3e3834] mb-3 text-center">
-                    <span className="text-[#fca311] font-medium text-sm font-mono">
+                  <div className="px-4 py-2 bg-sketch-bg rounded-lg border border-sketch-border mb-3 text-center">
+                    <span className="text-sketch-mustard font-medium text-sm font-mono">
                       {formatAddress(account)}
                     </span>
                   </div>
