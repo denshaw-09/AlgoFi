@@ -282,11 +282,10 @@ function Marketplace({ account, connected }) {
           <button
             key={option.value}
             onClick={() => setFilter(option.value)}
-            className={`px-4 py-2 rounded-lg font-bold transition border-2 ${
-              filter === option.value
+            className={`px-4 py-2 rounded-lg font-bold transition border-2 ${filter === option.value
                 ? 'bg-[#fca311] text-black border-[#f3e9d2] shadow-[2px_2px_0px_0px_#000]'
                 : 'bg-[#292524] text-gray-400 border-[#3e3834] hover:border-[#fca311]'
-            }`}
+              }`}
           >
             {option.icon} {option.label}
           </button>
@@ -310,12 +309,14 @@ function Marketplace({ account, connected }) {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredNfts.map(nft => (
-            <NFTCard
-              key={nft.id}
-              nft={nft}
-              account={account}
-              showActions={connected}
-            />
+            <div>
+              <NFTCard
+                key={nft.id}
+                nft={nft}
+                account={account}
+                showActions={connected}
+              />
+            </div>
           ))}
         </div>
       )}

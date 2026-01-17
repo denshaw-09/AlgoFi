@@ -98,7 +98,7 @@ function Home({ account, connected }) {
                 Explore Marketplace
               </button>
             </Link>
-            
+
             {connected ? (
               <a href="#mint">
                 <button className="btn-sketch-secondary text-xl px-10 py-4">
@@ -117,7 +117,7 @@ function Home({ account, connected }) {
       {/* Stats*/}
       <section className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          
+
           {/* fast */}
           <div className="card-sketch p-6 flex items-center gap-6">
             <div className="flex-shrink-0">
@@ -128,7 +128,7 @@ function Home({ account, connected }) {
               <p className="text-[#292524] font-bold text-lg font-['Patrick_Hand']">4.5 Second Finality</p>
             </div>
           </div>
-          
+
           {/* low cost */}
           <div className="card-sketch p-6 flex items-center gap-6">
             <div className="flex-shrink-0">
@@ -156,18 +156,17 @@ function Home({ account, connected }) {
 
       {/* features */}
       <section className="max-w-6xl mx-auto">
-        <h2 className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
+        <h2 data-aos="fade-in" className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
           Why Choose AlgoFi?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div
-              key={index}
-              className="card-sketch-dark p-8 hover:scale-105 transition-transform duration-300"
-            >
-              <div className="text-5xl mb-4">{feature.icon}</div>
-              <h3 className="text-2xl font-bold text-[#fca311] mb-3">{feature.title}</h3>
-              <p className="text-gray-300 text-lg">{feature.description}</p>
+            <div key={index} data-aos="fade-up">
+              <div className="card-sketch-dark p-8 hover:scale-105 transition-transform duration-300">
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-2xl font-bold text-[#fca311] mb-3">{feature.title}</h3>
+                <p className="text-gray-300 text-lg">{feature.description}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -175,11 +174,11 @@ function Home({ account, connected }) {
 
       {/* how it work section */}
       <section className="max-w-4xl mx-auto">
-        <h2 className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
+        <h2 data-aos="fade-in" className="text-5xl font-bold text-[#f3e9d2] text-center mb-12">
           How It Works
         </h2>
         <div className="space-y-8">
-          <div className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
             <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
               1
             </div>
@@ -190,8 +189,8 @@ function Home({ account, connected }) {
               </p>
             </div>
           </div>
-          
-          <div className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
+
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
             <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
               2
             </div>
@@ -202,8 +201,8 @@ function Home({ account, connected }) {
               </p>
             </div>
           </div>
-          
-          <div className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
+
+          <div data-aos="fade-up" className="flex items-center space-x-6 bg-[#292524] p-6 rounded-xl border-2 border-[#3e3834]">
             <div className="flex-shrink-0 w-16 h-16 bg-[#fca311] rounded-full flex items-center justify-center text-[#292524] font-bold text-3xl border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000]">
               3
             </div>

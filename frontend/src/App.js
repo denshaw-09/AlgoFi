@@ -7,7 +7,9 @@ import Marketplace from './views/Marketplace';
 import Portfolio from './views/Portfolio';
 import ScrollToTop from './components/ScrollToTop';
 
-// bg assets 
+// AOS for animations
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Chains = () => (
   <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -141,6 +143,14 @@ function App() {
       peraWallet.connector?.off("connect");
     };
   }, [peraWallet, handleDisconnectWallet]);
+
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
 
   return (
     <Router>

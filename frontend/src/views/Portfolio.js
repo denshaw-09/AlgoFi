@@ -193,12 +193,14 @@ function Portfolio({ account, connected }) {
               {ownedNfts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {ownedNfts.map(nft => (
-                    <NFTCard
-                      key={nft.id}
-                      nft={nft}
-                      account={account}
-                      showActions={false}
-                    />
+                    <div>
+                      <NFTCard
+                        key={nft.id}
+                        nft={nft}
+                        account={account}
+                        showActions={false}
+                      />
+                    </div>
                   ))}
                 </div>
               ) : (
@@ -228,6 +230,20 @@ function Portfolio({ account, connected }) {
                 </div>
               ) : (
                 <EmptyCreatedNFTs />
+                <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
+                  <div className="text-6xl mb-4">🎨</div>
+                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No Created NFTs</h3>
+                  <p className="text-gray-400 mb-6">
+                    Start creating by minting your first NFT
+                  </p>
+                  <a
+                  
+                    href="/"
+                    className="inline-block btn-sketch-primary"
+                  >
+                    Create Your First NFT
+                  </a>
+                </div>
               )}
             </div>
           )}
@@ -239,13 +255,15 @@ function Portfolio({ account, connected }) {
         <h3 className="text-2xl font-bold text-[#f3e9d2] mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <a
+          
             href="/"
             className="p-6 bg-[#1c1917] hover:bg-[#3e3834] rounded-xl border-2 border-[#3e3834] transition text-center hover:-translate-y-1"
           >
-            <div className="text-4xl mb-2">🎨</div>
+            <div  className="text-4xl mb-2">🎨</div>
             <p className="text-[#f3e9d2] font-medium">Mint New NFT</p>
           </a>
           <a
+          
             href="/marketplace"
             className="p-6 bg-[#1c1917] hover:bg-[#3e3834] rounded-xl border-2 border-[#3e3834] transition text-center hover:-translate-y-1"
           >
@@ -253,6 +271,7 @@ function Portfolio({ account, connected }) {
             <p className="text-[#f3e9d2] font-medium">Browse Marketplace</p>
           </a>
           <a
+          
             href={`https://testnet.algoexplorer.io/address/${account}`}
             target="_blank"
             rel="noopener noreferrer"
