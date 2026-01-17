@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { router as nftRoutes } from "./src/routes/nftRoutes.js";
 import ipfsRoutes from "./src/routes/ipfsRoutes.js";
+import userIpfsRoutes from "./src/routes/userIpfsRoutes.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/nfts", nftRoutes);
 app.use("/api/ipfs", ipfsRoutes);
+app.use("/api/ipfs", userIpfsRoutes);
 
 // Health check
 app.get("/health", (req, res) => {
