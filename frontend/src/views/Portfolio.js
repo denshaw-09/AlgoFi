@@ -193,14 +193,12 @@ function Portfolio({ account, connected }) {
               {ownedNfts.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {ownedNfts.map(nft => (
-                    <div>
-                      <NFTCard
-                        key={nft.id}
-                        nft={nft}
-                        account={account}
-                        showActions={false}
-                      />
-                    </div>
+                    <NFTCard
+                      key={nft.id}
+                      nft={nft}
+                      account={account}
+                      showActions={false}
+                    />
                   ))}
                 </div>
               ) : (
@@ -230,20 +228,6 @@ function Portfolio({ account, connected }) {
                 </div>
               ) : (
                 <EmptyCreatedNFTs />
-                <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
-                  <div className="text-6xl mb-4">🎨</div>
-                  <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No Created NFTs</h3>
-                  <p className="text-gray-400 mb-6">
-                    Start creating by minting your first NFT
-                  </p>
-                  <a
-                  
-                    href="/"
-                    className="inline-block btn-sketch-primary"
-                  >
-                    Create Your First NFT
-                  </a>
-                </div>
               )}
             </div>
           )}
