@@ -3,9 +3,11 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
-function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
+// Optimized NFTCard with React.memo to prevent unnecessary re-renders
+const NFTCard = React.memo(({ nft, account, onBuySuccess, showActions = true }) => {
   const [loading, setLoading] = useState(false);
   const [showBuyModal, setShowBuyModal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const typeEmojis = {
     art: '🎨',
@@ -47,11 +49,23 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
         {/* img container */}
         <div className="relative aspect-square overflow-hidden bg-[#292524] border-b-4 border-[#3e3834]">
           {nft.imageUrl ? (
-            <img
-              src={nft.imageUrl}
-              alt={nft.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
-            />
+            <>
+              <img
+                src={nft.imageUrl}
+                alt={nft.name}
+                loading="lazy"
+                decoding="async"
+                onLoad={() => setImageLoaded(true)}
+                className={`w-full h-full object-cover group-hover:scale-110 transition duration-300 ${
+                  imageLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+              />
+              {!imageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-pulse text-6xl">{typeEmojis[nft.type] || '💎'}</div>
+                </div>
+              )}
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               <span className="text-8xl">{typeEmojis[nft.type] || '💎'}</span>
@@ -186,6 +200,8 @@ function NFTCard({ nft, account, onBuySuccess, showActions = true }) {
       )}
     </>
   );
-}
+});
+
+NFTCard.displayName = 'NFTCard';
 
 export default NFTCard;
