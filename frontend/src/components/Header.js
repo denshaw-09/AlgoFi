@@ -70,7 +70,7 @@ function Header({
                 </div>
                 <button
                   onClick={disconnectWallet}
-                  className="btn-sketch-secondary px-4 py-2 text-base"
+                 className="w-full btn-sketch-primary"
                 >
                   Disconnect
                 </button>
@@ -144,7 +144,7 @@ function Header({
                       disconnectWallet();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full btn-sketch-secondary py-3"
+                    className="w-full btn-sketch-primary"
                   >
                     Disconnect
                   </button>
