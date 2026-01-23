@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-bg: #1c1917;       /* Dark Coffee/Black */
+  --color-cream: #f3e9d2;    /* Paper/Cream */
+  --color-mustard: #fca311;  /* Mustard/Orange */
+  --color-dark-text: #292524;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,103 +17,116 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-cream);
+  font-family: 'Patrick Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka One', cursive;
+  letter-spacing: 0.05em;
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-
+/* Scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb {
-  background: #ac9ecb;
-  border-radius: 5px;
+  background: #3e3834;
+  border: 2px solid var(--color-bg);
+  border-radius: 10px;
 }
+::-webkit-scrollbar-thumb:hover { background: var(--color-mustard); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a495bf;
-}
+/* custom sketch component*/
 
-/* Custom Utilities */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.backdrop-blur-lg {
-  backdrop-filter: blur(16px);
-}
-
-.backdrop-blur-sm {
-  backdrop-filter: blur(8px);
-}
-
-/* Animation */
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient 15s ease infinite;
-}
-
-/* Glitter Effect */
-@keyframes glitter {
-  0% {
-    transform: translateX(-100%) skewX(-15deg);
-  }
-  100% {
-    transform: translateX(200%) skewX(-15deg);
-  }
-}
-
-.hover-glitter {
+/* Primary button (Matches "Explore Marketplace") */
+.btn-sketch-primary {
+  background-color: var(--color-mustard);
+  color: #1c1917; /* Dark text */
+  font-family: 'Fredoka One', cursive;
+  border: 3px solid var(--color-cream); /* Cream border */
+  border-radius: 12px; /* Slightly rounded */
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  box-shadow: 0px 6px 0px 0px #141211; /* Hard dark shadow */
+  transition: all 0.15s ease;
+  text-align: center;
   position: relative;
-  overflow: hidden;
-}
-
-.hover-glitter::after {
-  content: '';
-  position: absolute;
   top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
-  transform: skewX(-15deg) translateX(-250%);
-  transition: transform 0s;
-  pointer-events: none;
 }
 
-.hover-glitter:hover::after {
-  animation: glitter 0.8s ease-in-out;
+.btn-sketch-primary:hover:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0px 4px 0px 0px #141211;
+}
+
+.btn-sketch-primary:active:not(:disabled) {
+  transform: translateY(6px);
+  box-shadow: 0px 0px 0px 0px #141211;
+}
+
+.btn-sketch-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
+/*Secondary button (Matches "Connect Wallet") */
+.btn-sketch-secondary {
+  background-color: var(--color-cream);
+  color: #1c1917;
+  font-family: 'Fredoka One', cursive;
+  border: 3px solid var(--color-cream);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  box-shadow: 0px 6px 0px 0px #141211;
+  transition: all 0.15s ease;
+  text-align: center;
+}
+
+.btn-sketch-secondary:hover {
+  transform: translateY(2px);
+  box-shadow: 0px 4px 0px 0px #141211;
+}
+
+.btn-sketch-secondary:active {
+  transform: translateY(6px);
+  box-shadow: 0px 0px 0px 0px #141211;
+}
+
+/*Cards */
+.card-sketch {
+  background-color: var(--color-cream);
+  color: var(--color-dark-text);
+  border: 3px solid #3e3834;
+  border-radius: 16px;
+  box-shadow: 6px 6px 0px 0px #000000;
+}
+
+.card-sketch-dark {
+  background-color: #292524;
+  color: var(--color-cream);
+  border: 3px solid var(--color-cream); /* Cream border on dark card */
+  border-radius: 16px;
+  box-shadow: 8px 8px 0px 0px #141211;
+}
+
+/*Inputs*/
+.input-sketch {
+  background-color: var(--color-cream);
+  border: 3px solid #3e3834;
+  color: var(--color-dark-text);
+  border-radius: 8px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  box-shadow: 4px 4px 0px 0px #141211;
+}
+
+.input-sketch:focus {
+  outline: none;
+  border-color: var(--color-mustard);
+  transform: translate(-1px, -1px);
 }

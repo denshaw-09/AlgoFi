@@ -329,12 +329,40 @@ MIT License
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! 
+Please read our [Contributing Guidelines](Contributions.md) before submitting a Pull Request.
+
+For discussions, questions, or onboarding help, join us on **Discord**:  
+  👉 **Discord:** <DISCORD_LINK>(https://discord.gg/VcbbKWC9Xc)
 
 ## Support
 
-For issues and questions, please open an issue on the GitHub repository.
+If you need help or have questions:
+
+- Open an issue on the GitHub repository
+- Join our community on **Discord** for discussions and contributor support.
 
 ---
+
+## Summary
+
+This PR improves contributor onboarding and communication by:
+
+- Adding the official Discord link to the Contributing Guidelines and README
+- Clarifying how contributors should use Discord, GitHub Issues, and Discussions
+- Improving wording and structure in the Community & Communication section
+- Updating the Code of Conduct contact section for better clarity
+
+## Motivation
+
+Discord provides a faster and more collaborative environment for contributors.
+This change helps new contributors know where to ask questions and engage with the community while ensuring all interactions follow the Code of Conduct.
+
+## Checklist
+
+- [x] Documentation updated
+- [x] No breaking changes
+- [x] Follows project guidelines
+
 
 Built with ❤️ on Algorand

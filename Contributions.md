@@ -155,15 +155,18 @@ Maintain consistency throughout the codebase:
 
 ---
 
-##  Community and Communication
+## Community and Communication
 
-* Be respectful and constructive in discussions.
-* Join our community discussions via **Discussions on discord** or post your dount by raising issues .
-* Don’t hesitate to ask questions — we’re here to help!
+We value open and respectful communication within the AlgoFi community.
+You can engage with us through the following channels:
 
----
+- **Discord**: Join our Discord server for contributor discussions, questions, and real-time collaboration.  
+  **Discord Invite:** [<DISCORD_LINK>](https://discord.gg/VcbbKWC9Xc)
 
-Thank you for contributing! 🫡
-Your efforts make this project better for everyone.
+- **GitHub Discussions**: Use GitHub Discussions for design proposals, feature ideas, and long-form conversations.
+
+- **GitHub Issues**: Report bugs or ask technical questions by opening an issue.
+
+Please ensure all interactions follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---

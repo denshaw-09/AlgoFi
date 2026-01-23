@@ -32,22 +32,17 @@ const ScrollToTop = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          // TAILWIND EXPLANATION:
-          // fixed bottom-8 right-8: positions it in the corner
-          // bg-gradient-to-r from-purple-600 to-pink-600: matches the "Explore Marketplace" button gradient
-          // rounded-full: makes it a perfect circle
-          // z-50: ensures it floats above the dark cards
-          className="fixed bottom-8 right-8 z-50 p-3 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 transform hover:scale-110 focus:outline-none"
+          className="fixed bottom-8 right-8 z-50 p-4 rounded-xl bg-[#fca311] text-[#1c1917] border-2 border-[#f3e9d2] shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_#000] transition-all duration-200 focus:outline-none"
           aria-label="Scroll to top"
         >
           {/* Simple Up Arrow SVG */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="h-8 w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            strokeWidth={2}
+            strokeWidth={3}
           >
             <path
               strokeLinecap="round"

@@ -147,17 +147,18 @@ const togglePriceFilter = (value) => {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-5xl font-bold text-white mb-4">
+        <h1 className="text-5xl font-bold text-[#f3e9d2] mb-4">
           Explore Marketplace
         </h1>
 
         <p className="text-xl text-gray-300">
+        <p className="text-xl text-gray-400">
           Discover unique NFTs from talented creators
         </p>
       </div>
 
       {/* Filters */}
-      <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl p-6 border border-purple-500/20">
+      <div className="bg-[#292524] rounded-2xl p-6 border-2 border-[#3e3834] shadow-[4px_4px_0px_0px_#000]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search */}
           <div className="md:col-span-1">
@@ -166,7 +167,7 @@ const togglePriceFilter = (value) => {
               placeholder="Search NFTs..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 input-sketch"
             />
           </div>
 
@@ -175,7 +176,7 @@ const togglePriceFilter = (value) => {
             <select
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 input-sketch cursor-pointer"
             >
               {filterOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -190,7 +191,7 @@ const togglePriceFilter = (value) => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-700/50 border border-purple-500/30 rounded-lg text-white focus:outline-none focus:border-purple-500"
+              className="w-full px-4 py-3 input-sketch cursor-pointer"
             >
               <option value="newest">Newest First</option>
               <option value="price-low">Price: Low to High</option>
@@ -236,35 +237,51 @@ const togglePriceFilter = (value) => {
           ))}
         </div>
 
+      {/* Filter Pills */}
+      <div className="flex flex-wrap gap-3">
+        {filterOptions.map(option => (
+          <button
+            key={option.value}
+            onClick={() => setFilter(option.value)}
+            className={`px-4 py-2 rounded-lg font-bold transition border-2 ${filter === option.value
+                ? 'bg-[#fca311] text-black border-[#f3e9d2] shadow-[2px_2px_0px_0px_#000]'
+                : 'bg-[#292524] text-gray-400 border-[#3e3834] hover:border-[#fca311]'
+              }`}
+          >
+            {option.icon} {option.label}
+          </button>
+        ))}
       </div>
 
 
       {/* Results Count */}
-      <div className="text-gray-300">
-        Showing <span className="font-bold text-white">{filteredNfts.length}</span> {filteredNfts.length === 1 ? 'NFT' : 'NFTs'}
+      <div className="text-gray-400 text-lg">
+        Showing <span className="font-bold text-[#fca311]">{filteredNfts.length}</span> {filteredNfts.length === 1 ? 'NFT' : 'NFTs'}
       </div>
 
       {/* NFT Grid */}
       {loading ? (
         <div className="text-center py-20">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500"></div>
-          <p className="text-gray-400 mt-4">Loading marketplace...</p>
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#fca311]"></div>
+          <p className="text-gray-400 mt-4 text-xl">Loading marketplace...</p>
         </div>
       ) : filteredNfts.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredNfts.map(nft => (
-            <NFTCard
-              key={nft.id}
-              nft={nft}
-              account={account}
-              showActions={connected}
-            />
+            <div>
+              <NFTCard
+                key={nft.id}
+                nft={nft}
+                account={account}
+                showActions={connected}
+              />
+            </div>
           ))}
         </div>
       ) : (
-        <div className="text-center py-20">
+        <div className="text-center py-20 bg-[#292524] rounded-2xl border-2 border-[#3e3834]">
           <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-2xl font-bold text-white mb-2">No NFTs Found</h3>
+          <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">No NFTs Found</h3>
           <p className="text-gray-400">
             Try adjusting your filters or search query
           </p>
@@ -273,8 +290,8 @@ const togglePriceFilter = (value) => {
 
       {/* Info Banner */}
       {!connected && (
-        <div className="bg-purple-500/20 backdrop-blur-lg rounded-2xl p-8 border border-purple-500/30 text-center">
-          <h3 className="text-2xl font-bold text-white mb-2">
+        <div className="bg-[#292524] rounded-2xl p-8 border-2 border-[#fca311] text-center shadow-[6px_6px_0px_0px_#000]">
+          <h3 className="text-2xl font-bold text-[#f3e9d2] mb-2">
             Connect Your Wallet
           </h3>
           <p className="text-gray-300">
