@@ -2,12 +2,49 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========== THEME VARIABLES ========== */
+
+/* Dark mode (default) */
 :root {
-  --color-bg: #1c1917;       /* Dark Coffee/Black */
-  --color-cream: #f3e9d2;    /* Paper/Cream */
-  --color-mustard: #fca311;  /* Mustard/Orange */
+  --color-bg: #1c1917;
+  --color-bg-secondary: #292524;
+  --color-cream: #f3e9d2;
+  --color-mustard: #fca311;
+  --color-text: #f3e9d2;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
   --color-dark-text: #292524;
+  --color-border: #3e3834;
+  --color-shadow: #141211;
+  --color-card-bg: #f3e9d2;
+  --color-card-dark-bg: #292524;
+  --color-input-bg: #f3e9d2;
+  --color-creator-bg: #e5dac1;
+  --color-toggle-bg: #292524;
+  --color-svg-fill: #000000;
 }
+
+/* Light mode */
+.light {
+  --color-bg: #f5f0e6;
+  --color-bg-secondary: #ede8dd;
+  --color-cream: #292524;
+  --color-mustard: #e59400;
+  --color-text: #1c1917;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-dark-text: #1c1917;
+  --color-border: #d4c9b5;
+  --color-shadow: #a89f8f;
+  --color-card-bg: #fffdf8;
+  --color-card-dark-bg: #fffdf8;
+  --color-input-bg: #fffdf8;
+  --color-creator-bg: #f5f0e6;
+  --color-toggle-bg: #fffdf8;
+  --color-svg-fill: #d4c9b5;
+}
+
+/* ========== BASE STYLES ========== */
 
 * {
   margin: 0;
@@ -18,10 +55,11 @@
 body {
   margin: 0;
   background-color: var(--color-bg);
-  color: var(--color-cream);
+  color: var(--color-text);
   font-family: 'Patrick Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,28 +67,37 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.05em;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar { width: 12px; }
-::-webkit-scrollbar-track { background: var(--color-bg); }
+/* ========== SCROLLBAR ========== */
+
+::-webkit-scrollbar { 
+  width: 12px; 
+}
+
+::-webkit-scrollbar-track { 
+  background: var(--color-bg); 
+}
+
 ::-webkit-scrollbar-thumb {
-  background: #3e3834;
+  background: var(--color-border);
   border: 2px solid var(--color-bg);
   border-radius: 10px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--color-mustard); }
 
-/* custom sketch component*/
+::-webkit-scrollbar-thumb:hover { 
+  background: var(--color-mustard); 
+}
 
-/* Primary button (Matches "Explore Marketplace") */
+/* ========== BUTTONS ========== */
+
 .btn-sketch-primary {
   background-color: var(--color-mustard);
-  color: #1c1917; /* Dark text */
+  color: #1c1917;
   font-family: 'Fredoka One', cursive;
-  border: 3px solid var(--color-cream); /* Cream border */
-  border-radius: 12px; /* Slightly rounded */
+  border: 3px solid var(--color-cream);
+  border-radius: 12px;
   padding: 12px 24px;
   font-size: 1.2rem;
-  box-shadow: 0px 6px 0px 0px #141211; /* Hard dark shadow */
+  box-shadow: 0px 6px 0px 0px var(--color-shadow);
   transition: all 0.15s ease;
   text-align: center;
   position: relative;
@@ -59,12 +106,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-sketch-primary:hover:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0px 4px 0px 0px #141211;
+  box-shadow: 0px 4px 0px 0px var(--color-shadow);
 }
 
 .btn-sketch-primary:active:not(:disabled) {
   transform: translateY(6px);
-  box-shadow: 0px 0px 0px 0px #141211;
+  box-shadow: 0px 0px 0px 0px var(--color-shadow);
 }
 
 .btn-sketch-primary:disabled {
@@ -73,60 +120,78 @@ h1, h2, h3, h4, h5, h6 {
   filter: grayscale(100%);
 }
 
-/*Secondary button (Matches "Connect Wallet") */
 .btn-sketch-secondary {
-  background-color: var(--color-cream);
-  color: #1c1917;
+  background-color: var(--color-card-bg);
+  color: var(--color-dark-text);
   font-family: 'Fredoka One', cursive;
-  border: 3px solid var(--color-cream);
+  border: 3px solid var(--color-border);
   border-radius: 12px;
   padding: 12px 24px;
   font-size: 1.2rem;
-  box-shadow: 0px 6px 0px 0px #141211;
+  box-shadow: 0px 6px 0px 0px var(--color-shadow);
   transition: all 0.15s ease;
   text-align: center;
 }
 
 .btn-sketch-secondary:hover {
   transform: translateY(2px);
-  box-shadow: 0px 4px 0px 0px #141211;
+  box-shadow: 0px 4px 0px 0px var(--color-shadow);
 }
 
 .btn-sketch-secondary:active {
   transform: translateY(6px);
-  box-shadow: 0px 0px 0px 0px #141211;
+  box-shadow: 0px 0px 0px 0px var(--color-shadow);
 }
 
-/*Cards */
+/* ========== CARDS ========== */
+
 .card-sketch {
-  background-color: var(--color-cream);
+  background-color: var(--color-card-bg);
   color: var(--color-dark-text);
-  border: 3px solid #3e3834;
+  border: 3px solid var(--color-border);
   border-radius: 16px;
-  box-shadow: 6px 6px 0px 0px #000000;
+  box-shadow: 6px 6px 0px 0px var(--color-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-sketch-dark {
-  background-color: #292524;
-  color: var(--color-cream);
-  border: 3px solid var(--color-cream); /* Cream border on dark card */
+  background-color: var(--color-card-dark-bg);
+  color: var(--color-text);
+  border: 3px solid var(--color-border);
   border-radius: 16px;
-  box-shadow: 8px 8px 0px 0px #141211;
+  box-shadow: 8px 8px 0px 0px var(--color-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/*Inputs*/
+/* ========== INPUTS ========== */
+
 .input-sketch {
-  background-color: var(--color-cream);
-  border: 3px solid #3e3834;
+  background-color: var(--color-input-bg);
+  border: 3px solid var(--color-border);
   color: var(--color-dark-text);
   border-radius: 8px;
   font-family: 'Patrick Hand', cursive;
   font-size: 1.1rem;
-  box-shadow: 4px 4px 0px 0px #141211;
+  box-shadow: 4px 4px 0px 0px var(--color-shadow);
+  transition: all 0.2s ease;
+}
+
+.input-sketch::placeholder {
+  color: var(--color-text-muted);
 }
 
 .input-sketch:focus {
   outline: none;
   border-color: var(--color-mustard);
   transform: translate(-1px, -1px);
+}
+
+/* ========== BACKGROUND SVGs ========== */
+
+.bg-svg-decorative {
+  transition: opacity 0.3s ease;
+}
+
+.light .bg-svg-decorative {
+  opacity: 0.08;
 }
