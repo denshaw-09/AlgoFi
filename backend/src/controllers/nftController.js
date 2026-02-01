@@ -1,4 +1,6 @@
+
 import algorandService from "../services/algorandService.js";
+import { fetchUserFromIPFS } from "../services/ipfsUserService.js";
 
 class NFTController {
   /**
@@ -46,18 +48,29 @@ class NFTController {
         unitName,
         description,
         metadata,
+        userIpfsHash,
       } = req.body;
 
-      console.log("Mint NFT Request:", {
-        creator,
-        name,
-        type,
-        purchasable,
-        price,
-      });
+      let finalCreator = creator;
+      let userInfo = null;
+
+      // If userIpfsHash is provided, fetch user info from IPFS
+      if (userIpfsHash) {
+        try {
+          userInfo = await fetchUserFromIPFS(userIpfsHash);
+          if (userInfo && userInfo.address) {
+            finalCreator = userInfo.address;
+          }
+        } catch (e) {
+          return res.status(400).json({
+            success: false,
+            error: "Failed to fetch user info from IPFS. Please check your user IPFS hash.",
+          });
+        }
+      }
 
       // Validation
-      if (!creator) {
+      if (!finalCreator) {
         return res.status(400).json({
           success: false,
           error: "Creator address is required. Please connect your wallet.",
@@ -87,7 +100,7 @@ class NFTController {
 
       // Create NFT asset transaction
       const assetTxn = await algorandService.createNFTAsset({
-        creator,
+        creator: finalCreator,
         assetName: assetName || name,
         unitName: unitName || "NFT",
         total: 1,
@@ -98,7 +111,7 @@ class NFTController {
 
       // Create application call transaction
       const appTxn = await algorandService.createMintTransaction({
-        creator,
+        creator: finalCreator,
         name,
         type,
         purchasable: purchasable || false,
@@ -106,18 +119,16 @@ class NFTController {
         metadata: description || metadata || "",
       });
 
-      console.log("Mint transactions created successfully");
-
       res.status(200).json({
         success: true,
         data: {
           assetTransaction: assetTxn,
           appTransaction: appTxn,
+          userInfo,
           message: "Sign both transactions in your wallet",
         },
       });
     } catch (error) {
-      console.error("Mint NFT error:", error);
       res.status(500).json({
         success: false,
         error: error.message,
