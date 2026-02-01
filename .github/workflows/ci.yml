@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend_build:
+    name: Frontend - Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies (non-blocking peer deps)
+        run: npm ci --legacy-peer-deps
+
+      - name: Dependency health notes (non-blocking)
+        continue-on-error: true
+        run: |
+          echo "::warning::Known issue: react-scripts@5 has a TypeScript peer range (^3.2.1 || ^4). Repo may resolve newer TypeScript via transitive deps; CI uses --legacy-peer-deps to avoid ERESOLVE. Consider pinning TypeScript to 4.9.x or migrating away from CRA."
+          npm ls react-scripts || true
+          npm ls typescript || true
+
+      - name: Build
+        run: npm run build
+
+  backend_tests_optional:
+    name: Backend - Install & Tests (non-blocking when no tests)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests (Jest)
+        run: npm test -- --ci --passWithNoTests
+
+      - name: Test status notes (non-blocking)
+        continue-on-error: true
+        shell: bash
+        run: |
+          if ! find . -type f \( -name "*.test.js" -o -name "*.spec.js" -o -name "*.test.ts" -o -name "*.spec.ts" \) | grep -q .; then
+            echo "::warning::No backend test files found. Jest ran with --passWithNoTests to keep CI green. Add tests under __tests__/ or using *.test.js/*.spec.js to make CI meaningful."
+          else
+            echo "Backend tests detected."
+          fi
+
+  smart_contract_compile:
+    name: Smart Contracts - Compile PyTeal
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: smart_contracts
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install pyteal
+
+      - name: Compile contracts
+        run: python algomint_contract.py
+
+      - name: Verify TEAL artifacts exist
+        shell: bash
+        run: |
+          test -f approval.teal
+          test -f clear.teal
+          echo "TEAL artifacts present."
+
+      - name: Upload TEAL artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: teal-artifacts
+          path: |
+            smart_contracts/approval.teal
+            smart_contracts/clear.teal
