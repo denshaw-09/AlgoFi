@@ -173,44 +173,59 @@ function Home({ account, connected }) {
       </section>
 
       {/* how it work section */}
-      <section className="max-w-4xl mx-auto">
-        <h2 data-aos="fade-in" className="text-5xl font-bold text-sketch-text text-center mb-12">
+      <section className="max-w-5xl mx-auto px-4">
+        <h2 data-aos="fade-in" className="text-5xl font-bold text-sketch-text text-center mb-16">
           How It Works
         </h2>
-        <div className="space-y-8">
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
-            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
-              1
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-sketch-text mb-2">Connect Your Wallet</h3>
-              <p className="text-sketch-text-secondary text-lg">
-                Connect your Pera Wallet or any Algorand-compatible wallet to get started
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {/* Card 1 */}
+          <div data-aos="fade-up" className="group relative">
+            <div className="absolute inset-0 bg-sketch-mustard rounded-2xl transform translate-x-2 translate-y-2 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative bg-sketch-bg-secondary p-8 rounded-2xl border-2 border-sketch-border hover:border-sketch-mustard transition-all duration-300 h-full flex flex-col hover:shadow-[6px_6px_0px_0px_var(--color-shadow)]">
+              <div className="flex-shrink-0 w-20 h-20 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-4xl border-3 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)] group-hover:shadow-[6px_6px_0px_0px_var(--color-shadow)] transition-shadow duration-300 mb-6">
+                1
+              </div>
+              <h3 className="text-2xl font-bold text-sketch-text mb-3">Connect Your Wallet</h3>
+              <p className="text-sketch-text-secondary text-base leading-relaxed flex-grow">
+                Connect your Pera Wallet or any Algorand-compatible wallet to get started with AlgoFi
               </p>
+              <div className="mt-6 flex items-center text-sketch-mustard font-semibold text-sm group-hover:translate-x-1 transition-transform duration-300">
+                Get Started <span className="ml-2">→</span>
+              </div>
             </div>
           </div>
 
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
-            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
-              2
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-sketch-text mb-2">Create Your NFT</h3>
-              <p className="text-sketch-text-secondary text-lg">
+          {/* Card 2 */}
+          <div data-aos="fade-up" data-aos-delay="100" className="group relative">
+            <div className="absolute inset-0 bg-sketch-mustard rounded-2xl transform translate-x-2 translate-y-2 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative bg-sketch-bg-secondary p-8 rounded-2xl border-2 border-sketch-border hover:border-sketch-mustard transition-all duration-300 h-full flex flex-col hover:shadow-[6px_6px_0px_0px_var(--color-shadow)]">
+              <div className="flex-shrink-0 w-20 h-20 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-4xl border-3 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)] group-hover:shadow-[6px_6px_0px_0px_var(--color-shadow)] transition-shadow duration-300 mb-6">
+                2
+              </div>
+              <h3 className="text-2xl font-bold text-sketch-text mb-3">Create Your NFT</h3>
+              <p className="text-sketch-text-secondary text-base leading-relaxed flex-grow">
                 Upload your artwork, music, or any digital asset and set your preferences
               </p>
+              <div className="mt-6 flex items-center text-sketch-mustard font-semibold text-sm group-hover:translate-x-1 transition-transform duration-300">
+                Create Now <span className="ml-2">→</span>
+              </div>
             </div>
           </div>
 
-          <div data-aos="fade-up" className="flex items-center space-x-6 bg-sketch-bg-secondary p-6 rounded-xl border-2 border-sketch-border">
-            <div className="flex-shrink-0 w-16 h-16 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-3xl border-2 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)]">
-              3
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl font-bold text-sketch-text mb-2">List or Share</h3>
-              <p className="text-sketch-text-secondary text-lg">
+          {/* Card 3 */}
+          <div data-aos="fade-up" data-aos-delay="200" className="group relative">
+            <div className="absolute inset-0 bg-sketch-mustard rounded-2xl transform translate-x-2 translate-y-2 opacity-20 group-hover:opacity-30 transition-opacity duration-300"></div>
+            <div className="relative bg-sketch-bg-secondary p-8 rounded-2xl border-2 border-sketch-border hover:border-sketch-mustard transition-all duration-300 h-full flex flex-col hover:shadow-[6px_6px_0px_0px_var(--color-shadow)]">
+              <div className="flex-shrink-0 w-20 h-20 bg-sketch-mustard rounded-full flex items-center justify-center text-sketch-bg-secondary font-bold text-4xl border-3 border-sketch-border shadow-[4px_4px_0px_0px_var(--color-shadow)] group-hover:shadow-[6px_6px_0px_0px_var(--color-shadow)] transition-shadow duration-300 mb-6">
+                3
+              </div>
+              <h3 className="text-2xl font-bold text-sketch-text mb-3">List or Share</h3>
+              <p className="text-sketch-text-secondary text-base leading-relaxed flex-grow">
                 List your NFT for sale on the marketplace or share it as a free collectible
               </p>
+              <div className="mt-6 flex items-center text-sketch-mustard font-semibold text-sm group-hover:translate-x-1 transition-transform duration-300">
+                Explore Marketplace <span className="ml-2">→</span>
+              </div>
             </div>
           </div>
         </div>
