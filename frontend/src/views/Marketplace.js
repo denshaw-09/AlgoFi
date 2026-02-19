@@ -95,6 +95,7 @@ function Marketplace({ account, connected }) {
       result = result.filter(nft =>
         nft.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         nft.description.toLowerCase().includes(searchQuery.toLowerCase())
+        nft.creator.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
@@ -203,9 +204,8 @@ function Marketplace({ account, connected }) {
       ) : filteredNfts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredNfts.map(nft => (
-            <div>
+            <div key={nft.id}>
               <NFTCard
-                key={nft.id}
                 nft={nft}
                 account={account}
                 showActions={connected}
